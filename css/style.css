@@ -1167,7 +1167,7 @@ h6 {
   right: 20px;
 }
 .catalog__heart.favorite {
-  background: url(../../img/icons/red-heart.png);
+  background: url(./../img/icons/red-heart.png);
   background-size: cover;
   background-repeat: no-repeat;
 }
