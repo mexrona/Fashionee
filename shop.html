@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="img/favicons/apple-touch-icon.png" />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="img/favicons/favicon-32x32.png" />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="img/favicons/favicon-16x16.png" />
+        <link rel="manifest" href="img/favicons/site.webmanifest" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet" />
+        <link rel="stylesheet" href="css/style.css" />
+        <title>Shop</title>
+    </head>
+    <body>
+        <header class="header" id="header">
+            <div class="container container--header">
+                <div class="header__inner">
+                    <div class="header__left">
+                        <div class="header__menu">
+                            <div class="burger">
+                                <div class="burger__item"></div>
+                            </div>
+                            <div class="logo">
+                                <img src="img/logo.png" alt="Fashionee" />
+                            </div>
+                            <div class="menu">
+                                <img src="img/icons/menu.png" alt="Menu" />
+                            </div>
+                        </div>
+                        <nav class="nav">
+                            <a class="nav__link" href="#">Home</a>
+                            <div class="nav__down">
+                                <a class="nav__link nav__link--list" href="#"
+                                    >Pages</a
+                                >
+                                <ul class="list">
+                                    <li>
+                                        <a class="list__link" href="#">About</a>
+                                    </li>
+                                    <li>
+                                        <a class="list__link" href="#">FAQ</a>
+                                    </li>
+                                    <li>
+                                        <a class="list__link" href="#"
+                                            >Collection</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a class="list__link" href="#"
+                                            >My profile</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a class="list__link" href="#"
+                                            >Log in</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a class="list__link" href="#"
+                                            >Registration</a
+                                        >
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="nav__down">
+                                <a
+                                    class="nav__link nav__link--list active"
+                                    href="#"
+                                    >Shop</a
+                                >
+                                <ul class="list">
+                                    <li>
+                                        <a class="list__link" href="#"
+                                            >Fashionee-Catton Shirt</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a class="list__link" href="#">Cart</a>
+                                    </li>
+                                    <li>
+                                        <a class="list__link" href="#"
+                                            >Wishlist</a
+                                        >
+                                    </li>
+                                </ul>
+                            </div>
+                            <a class="nav__link" href="#">Blog</a>
+                            <a class="nav__link" href="#">Contact</a>
+                        </nav>
+                    </div>
+                    <div class="header__right">
+                        <div class="header__item">
+                            <img
+                                class="header__icon"
+                                src="img/icons/search.png"
+                                alt="Search" />
+                        </div>
+                        <div class="header__item">
+                            <img
+                                class="header__icon"
+                                src="img/icons/user.png"
+                                alt="My profile" />
+                        </div>
+                        <div class="header__item">
+                            <img
+                                class="header__icon"
+                                src="img/icons/heart.png"
+                                alt="Wishlist" />
+                            <div class="header__count">0</div>
+                        </div>
+                        <div class="header__item">
+                            <img
+                                class="header__icon"
+                                src="img/icons/shopping-bag.png"
+                                alt="Cart" />
+                            <div class="header__count">0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <section class="intro">
+                <div class="container container--intro">
+                    <div class="intro__inner">
+                        <h1 class="intro__title">Shop</h1>
+                        <h2 class="intro__subtitle">Home<span>Shop</span></h2>
+                        <div class="intro__img intro__img--dots">
+                            <img src="img/intro/dots.png" alt="Dots" />
+                        </div>
+                        <div class="intro__img intro__img--background">
+                            <img
+                                src="img/intro/background.png"
+                                alt="Background" />
+                        </div>
+                    </div>
+                </div>
+                <div class="intro__line"></div>
+            </section>
+            <section class="container container--products">
+                <div class="products">
+                    <aside class="sidebar">
+                        <div class="input">
+                            <label>
+                                <input
+                                    class="input__item"
+                                    name="search"
+                                    type="text"
+                                    placeholder="Search" />
+                                <img
+                                    class="input__icon input__icon--search"
+                                    src="img/icons/search.png"
+                                    alt="Search" />
+                            </label>
+                        </div>
+                        <div class="categories">
+                            <h2 class="sidebar__title">Categories</h2>
+                            <div class="categories__inner">
+                                <div class="categories__item">All</div>
+                                <div class="categories__item active">Men</div>
+                                <div class="categories__item">Women</div>
+                                <div class="categories__item">Accessories</div>
+                                <div class="categories__item">New Arrivals</div>
+                            </div>
+                        </div>
+                        <div class="price">
+                            <h2 class="sidebar__title">Price</h2>
+                            <div class="price__inner">
+                                <div class="price__block">
+                                    <div class="price__item">&#36;21.00</div>
+                                    <div class="price__item">&#36;187.99</div>
+                                </div>
+                                <div class="price__element"></div>
+                            </div>
+                        </div>
+                        <div class="colors">
+                            <h2 class="sidebar__title">Colors</h2>
+                            <div class="colors__inner">
+                                <div class="colors__item">
+                                    <span class="colors__checkbox">
+                                        <img
+                                            class="colors__checkarrow"
+                                            src="img/icons/checkarrow.png"
+                                            alt="Check Arrow" />
+                                    </span>
+                                    <input
+                                        class="colors__input"
+                                        id="black"
+                                        name="color"
+                                        type="checkbox"
+                                        value="black" />
+                                    <label class="colors__label" for="black"
+                                        >Black</label
+                                    >
+                                </div>
+                                <div class="colors__item active">
+                                    <span class="colors__checkbox">
+                                        <img
+                                            class="colors__checkarrow"
+                                            src="img/icons/checkarrow.png"
+                                            alt="Check Arrow" />
+                                    </span>
+                                    <input
+                                        class="colors__input"
+                                        id="blue"
+                                        name="color"
+                                        type="checkbox"
+                                        value="blue" />
+                                    <label class="colors__label" for="blue"
+                                        >Blue</label
+                                    >
+                                </div>
+                                <div class="colors__item">
+                                    <span class="colors__checkbox">
+                                        <img
+                                            class="colors__checkarrow"
+                                            src="img/icons/checkarrow.png"
+                                            alt="Check Arrow" />
+                                    </span>
+                                    <input
+                                        class="colors__input"
+                                        id="red"
+                                        name="color"
+                                        type="checkbox"
+                                        value="red" />
+                                    <label class="colors__label" for="red"
+                                        >Red</label
+                                    >
+                                </div>
+                                <div class="colors__item">
+                                    <span class="colors__checkbox"
+                                        ><img
+                                            class="colors__checkarrow"
+                                            src="img/icons/checkarrow.png"
+                                            alt="Check Arrow"
+                                    /></span>
+                                    <input
+                                        class="colors__input"
+                                        id="yellow"
+                                        name="color"
+                                        type="checkbox"
+                                        value="yellow" />
+                                    <label class="colors__label" for="yellow"
+                                        >Yellow</label
+                                    >
+                                </div>
+                                <div class="colors__item">
+                                    <span class="colors__checkbox"
+                                        ><img
+                                            class="colors__checkarrow"
+                                            src="img/icons/checkarrow.png"
+                                            alt="Check Arrow"
+                                    /></span>
+                                    <input
+                                        class="colors__input"
+                                        id="green"
+                                        name="color"
+                                        type="checkbox"
+                                        value="green" />
+                                    <label class="colors__label" for="green"
+                                        >Green</label
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sidebar__deploy active">
+                            <div class="arrow arrow--sidebar"></div>
+                            Deploy
+                        </div>
+                        <div class="button">Apply Filter</div>
+                        <div class="reviewed">
+                            <h2 class="sidebar__title">Reviewed By You</h2>
+                            <div class="reviewed__inner">
+                                <div class="reviewed__item">
+                                    <a class="reviewed__preview" href="#">
+                                        <img
+                                            class="reviewed__img"
+                                            src="/"
+                                            alt="Retro style handbag" />
+                                    </a>
+                                    <div class="reviewed__info">
+                                        <a class="reviewed__name" href="#">
+                                            Retro style handbag
+                                        </a>
+                                        <div class="reviewed__price">
+                                            <span class="reviewed__new"
+                                                >&#36;35.99</span
+                                            >
+                                            <span class="reviewed__old"
+                                                >&#36;52.99</span
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="reviewed__item">
+                                    <a class="reviewed__preview" href="#">
+                                        <img
+                                            class="reviewed__img"
+                                            src="/"
+                                            alt="Warm casual sweater" />
+                                    </a>
+                                    <div class="reviewed__info">
+                                        <a class="reviewed__name" href="#">
+                                            Warm casual sweater
+                                        </a>
+                                        <div class="reviewed__price">
+                                            <span class="reviewed__new"
+                                                >&#36;35.99</span
+                                            >
+                                            <span class="reviewed__old"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="reviewed__item">
+                                    <a class="reviewed__preview" href="#">
+                                        <img
+                                            class="reviewed__img"
+                                            src="/"
+                                            alt="Textured turtleneck with zip" />
+                                    </a>
+                                    <div class="reviewed__info">
+                                        <a class="reviewed__name" href="#">
+                                            Textured turtleneck with zip
+                                        </a>
+                                        <div class="reviewed__price">
+                                            <span class="reviewed__new"
+                                                >&#36;35.99</span
+                                            >
+                                            <span class="reviewed__old"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="banner banner--sidebar">
+                            <div class="banner__inner banner__inner--sidebar">
+                                <div class="banner__suptitle">Season</div>
+                                <div class="banner__title">Sale</div>
+                                <p class="banner__text">
+                                    Non aliqua reprehenderit reprehenderit culpa
+                                    laboris nulla
+                                </p>
+                                <a class="banner__link" href="#">Shop Now</a>
+                            </div>
+                        </div>
+                    </aside>
+                    <div class="catalog">
+                        <div class="catalog__header">
+                            <div class="catalog__text">
+                                There are <span>67</span> products in this
+                                category
+                            </div>
+                            <div class="catalog__filter">
+                                By relevance
+                                <div class="arrow arrow--catalog"></div>
+                            </div>
+                        </div>
+                        <div class="catalog__inner" id="products">
+                            <!-- <div class="catalog__item">
+                                <a class="catalog__preview" href="#">
+                                    <img
+                                        class="catalog__img"
+                                        src="/"
+                                        alt="Textured turtleneck with zip" />
+                                </a>
+                                <div
+                                    class="catalog__status catalog__status--sale">
+                                    Sale
+                                </div>
+                                <div class="catalog__heart">
+                                    <img
+                                        src="img/icons/heart.png"
+                                        alt="Wishlist" />
+                                </div>
+                                <a class="catalog__name" href="#">
+                                    Textured turtleneck with zip
+                                </a>
+                                <div class="catalog__price">
+                                    <div class="catalog__new">&#36;53.99</div>
+                                    <div class="catalog__old">&#36;52.99</div>
+                                </div>
+                            </div>
+                            <div class="catalog__item">
+                                <a class="catalog__preview" href="#">
+                                    <img
+                                        class="catalog__img"
+                                        src="/"
+                                        alt="Spray wrap skirt" />
+                                </a>
+                                <div class="catalog__status"></div>
+                                <div class="catalog__heart">
+                                    <img
+                                        src="img/icons/heart.png"
+                                        alt="Wishlist" />
+                                </div>
+                                <a class="catalog__name" href="#">
+                                    Spray wrap skirt
+                                </a>
+                                <div class="catalog__price">
+                                    <div class="catalog__new">&#36;35.99</div>
+                                    <div class="catalog__old"></div>
+                                </div>
+                            </div>
+                            <div class="catalog__item">
+                                <a class="catalog__preview" href="#">
+                                    <img
+                                        class="catalog__img"
+                                        src="/"
+                                        alt="Short shorts with straps" />
+                                </a>
+                                <div class="catalog__status"></div>
+                                <div class="catalog__heart">
+                                    <img
+                                        src="img/icons/heart.png"
+                                        alt="Wishlist" />
+                                </div>
+                                <a class="catalog__name" href="#">
+                                    Short shorts with straps
+                                </a>
+                                <div class="catalog__price">
+                                    <div class="catalog__new">&#36;20.99</div>
+                                    <div class="catalog__old"></div>
+                                </div>
+                            </div>
+                            <div class="catalog__item">
+                                <a class="catalog__preview" href="#">
+                                    <img
+                                        class="catalog__img"
+                                        src="/"
+                                        alt="Fashionee - catton shirt" />
+                                </a>
+                                <div class="catalog__status"></div>
+                                <div class="catalog__heart">
+                                    <img
+                                        src="img/icons/heart.png"
+                                        alt="Wishlist" />
+                                </div>
+                                <a class="catalog__name" href="#">
+                                    Fashionee - catton shirt
+                                </a>
+                                <div class="catalog__price">
+                                    <div class="catalog__new">&#36;110.99</div>
+                                    <div class="catalog__old"></div>
+                                </div>
+                            </div>
+                            <div class="catalog__item">
+                                <a class="catalog__preview" href="#">
+                                    <img
+                                        class="catalog__img"
+                                        src="/"
+                                        alt="Warm casual sweater" />
+                                </a>
+                                <div
+                                    class="catalog__status catalog__status--new">
+                                    New
+                                </div>
+                                <div class="catalog__heart">
+                                    <img
+                                        src="img/icons/heart.png"
+                                        alt="Wishlist" />
+                                </div>
+                                <a class="catalog__name" href="#">
+                                    Warm casual sweater
+                                </a>
+                                <div class="catalog__price">
+                                    <div class="catalog__new">&#36;80.99</div>
+                                    <div class="catalog__old"></div>
+                                </div>
+                            </div>
+                            <div class="catalog__item">
+                                <a class="catalog__preview" href="#">
+                                    <img
+                                        class="catalog__img"
+                                        src="/"
+                                        alt="Retro style handbag" />
+                                </a>
+                                <div
+                                    class="catalog__status catalog__status--sale">
+                                    Sale
+                                </div>
+                                <div class="catalog__heart">
+                                    <img
+                                        src="img/icons/heart.png"
+                                        alt="Wishlist" />
+                                </div>
+                                <a class="catalog__name" href="#">
+                                    Retro style handbag
+                                </a>
+                                <div class="catalog__price">
+                                    <div class="catalog__new">&#36;45.99</div>
+                                    <div class="catalog__old">&#36;52.99</div>
+                                </div>
+                            </div>
+                            <div class="catalog__item">
+                                <a class="catalog__preview" href="#">
+                                    <img
+                                        class="catalog__img"
+                                        src="/"
+                                        alt="Style Handbag" />
+                                </a>
+                                <div class="catalog__status"></div>
+                                <div class="catalog__heart">
+                                    <img
+                                        src="img/icons/heart.png"
+                                        alt="Wishlist" />
+                                </div>
+                                <a class="catalog__name" href="#"
+                                    >Style Handbag</a
+                                >
+                                <div class="catalog__price">
+                                    <div class="catalog__new">&#36;180.99</div>
+                                    <div class="catalog__old"></div>
+                                </div>
+                            </div>
+                            <div class="catalog__item">
+                                <a class="catalog__preview" href="#">
+                                    <img
+                                        class="catalog__img"
+                                        src="/"
+                                        alt="Blouse with insert and ruffles" />
+                                </a>
+                                <div
+                                    class="catalog__status catalog__status--new">
+                                    New
+                                </div>
+                                <div class="catalog__heart">
+                                    <img
+                                        src="img/icons/heart.png"
+                                        alt="Wishlist" />
+                                </div>
+                                <a class="catalog__name" href="#">
+                                    Blouse with insert and ruffles
+                                </a>
+                                <div class="catalog__price">
+                                    <div class="catalog__new">&#36;30.99</div>
+                                    <div class="catalog__old"></div>
+                                </div>
+                            </div>
+                            <div class="catalog__item">
+                                <a class="catalog__preview" href="#">
+                                    <img
+                                        class="catalog__img"
+                                        src="/"
+                                        alt="Long oversized T-shirt" />
+                                </a>
+                                <div
+                                    class="catalog__status catalog__status--sale">
+                                    Sale
+                                </div>
+                                <div class="catalog__heart">
+                                    <img
+                                        src="img/icons/heart.png"
+                                        alt="Wishlist" />
+                                </div>
+                                <a class="catalog__name" href="#">
+                                    Long oversized T-shirt
+                                </a>
+                                <div class="catalog__price">
+                                    <div class="catalog__new">&#36;35.99</div>
+                                    <div class="catalog__old">&#36;52.99</div>
+                                </div>
+                            </div>
+                            <div class="catalog__item">
+                                <a class="catalog__preview" href="#">
+                                    <img
+                                        class="catalog__img"
+                                        src="/"
+                                        alt="Stylish and comfortable cap" />
+                                </a>
+                                <div class="catalog__status"></div>
+                                <div class="catalog__heart">
+                                    <img
+                                        src="img/icons/heart.png"
+                                        alt="Wishlist" />
+                                </div>
+                                <a class="catalog__name" href="#">
+                                    Stylish and comfortable cap
+                                </a>
+                                <div class="catalog__price">
+                                    <div class="catalog__new">&#36;40.99</div>
+                                    <div class="catalog__old"></div>
+                                </div>
+                            </div>
+                            <div class="catalog__item">
+                                <a class="catalog__preview" href="#">
+                                    <img
+                                        class="catalog__img"
+                                        src="/"
+                                        alt="Shoulder bag" />
+                                </a>
+                                <div
+                                    class="catalog__status catalog__status--new">
+                                    New
+                                </div>
+                                <div class="catalog__heart">
+                                    <img
+                                        src="img/icons/heart.png"
+                                        alt="Wishlist" />
+                                </div>
+                                <a class="catalog__name" href="#"
+                                    >Shoulder bag</a
+                                >
+                                <div class="catalog__price">
+                                    <div class="catalog__new">&#36;210.99</div>
+                                    <div class="catalog__old"></div>
+                                </div>
+                            </div>
+                            <div class="catalog__item">
+                                <a class="catalog__preview" href="#">
+                                    <img
+                                        class="catalog__img"
+                                        src="/"
+                                        alt="High-heeled shoes" />
+                                </a>
+                                <div
+                                    class="catalog__status catalog__status--sale">
+                                    Sale
+                                </div>
+                                <div class="catalog__heart">
+                                    <img
+                                        src="img/icons/heart.png"
+                                        alt="Wishlist" />
+                                </div>
+                                <a class="catalog__name" href="#">
+                                    High-heeled shoes
+                                </a>
+                                <div class="catalog__price">
+                                    <div class="catalog__new">&#36;70.99</div>
+                                    <div class="catalog__old">&#36;52.99</div>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="pager">
+                            <div class="pager__arrow pager__arrow--prev"></div>
+                            <div class="pager__inner">
+                                <div class="pager__item">
+                                    <div class="pager__number active">1</div>
+                                </div>
+                                <div class="pager__item">
+                                    <div class="pager__number">2</div>
+                                </div>
+                                <div class="pager__item">
+                                    <div class="pager__number">3</div>
+                                </div>
+                            </div>
+                            <div class="pager__arrow pager__arrow--next"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="newsletter">
+                <div class="container container--newsletter">
+                    <div class="newsletter__inner">
+                        <div class="newsletter__block">
+                            <div class="newsletter__item">
+                                <h3 class="newsletter__title">Newsletter</h3>
+                                <p class="newsletter__text">
+                                    Be the first to hear about deals, offers and
+                                    upcoming collections.
+                                </p>
+                                <form action="/" method="get">
+                                    <div class="newsletter__input">
+                                        <div class="input input--newsletter">
+                                            <label>
+                                                <input
+                                                    class="input__item"
+                                                    name="email"
+                                                    type="email"
+                                                    placeholder="Enter your email" />
+                                            </label>
+                                        </div>
+                                        <button
+                                            class="button button--newsletter"
+                                            type="submit">
+                                            Subscribe
+                                        </button>
+                                    </div>
+                                </form>
+                                <img
+                                    class="newsletter__img"
+                                    src="img/small-dots.png"
+                                    alt="Img" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="footer footer--shop">
+            <div class="container container--footer">
+                <div class="footer__inner">
+                    <div class="footer__block footer__block--1">
+                        <div class="footer__column footer__column--1">
+                            <div class="logo">
+                                <img src="img/logo.png" alt="Logo" />
+                            </div>
+                            <p class="footer__text footer__text--1">
+                                Cillum eu id enim aliquip aute ullamco.
+                                <br />
+                                Culpa deserunt nostrud excepteur voluptate.
+                            </p>
+                            <div class="socials">
+                                <h3 class="socials__title">Find us here:</h3>
+                                <div class="socials__inner">
+                                    <a
+                                        class="socials__link"
+                                        href="#"
+                                        target="_blank"
+                                        >FB</a
+                                    >
+                                    <a
+                                        class="socials__link"
+                                        href="#"
+                                        target="_blank"
+                                        >TW</a
+                                    >
+                                    <a
+                                        class="socials__link"
+                                        href="#"
+                                        target="_blank"
+                                        >INS</a
+                                    >
+                                    <a
+                                        class="socials__link"
+                                        href="#"
+                                        target="_blank"
+                                        >PT</a
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer__column footer__column--2">
+                            <div class="footer__item">
+                                <h5 class="footer__title">About</h5>
+                                <div class="footer__list">
+                                    <a
+                                        class="footer__text footer__text--link"
+                                        href="#"
+                                        >About us</a
+                                    >
+                                    <a
+                                        class="footer__text footer__text--link"
+                                        href="#"
+                                        >Collections</a
+                                    >
+                                    <a
+                                        class="footer__text footer__text--link"
+                                        href="#"
+                                        >Shop</a
+                                    >
+                                    <a
+                                        class="footer__text footer__text--link"
+                                        href="#"
+                                        >Blog</a
+                                    >
+                                    <a
+                                        class="footer__text footer__text--link"
+                                        href="#"
+                                        >Contact us</a
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer__column footer__column--3">
+                            <div class="footer__item">
+                                <h5 class="footer__title">Useful Links</h5>
+                                <div class="footer__list">
+                                    <a
+                                        class="footer__text footer__text--link"
+                                        href="#"
+                                        >Privacy Policy</a
+                                    >
+                                    <a
+                                        class="footer__text footer__text--link"
+                                        href="#"
+                                        >Terms of use</a
+                                    >
+                                    <a
+                                        class="footer__text footer__text--link"
+                                        href="#"
+                                        >Support</a
+                                    >
+                                    <a
+                                        class="footer__text footer__text--link"
+                                        href="#"
+                                        >Shipping details</a
+                                    >
+                                    <a
+                                        class="footer__text footer__text--link"
+                                        href="#"
+                                        >FAQs</a
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer__column footer__column--4">
+                            <h5
+                                class="newsletter__title newsletter__title--footer">
+                                Newsletter
+                            </h5>
+                            <p class="newsletter__text">
+                                Subscribe to be the first to hear about deals,
+                                offers and upcoming collections.
+                            </p>
+                            <div class="input input--footer">
+                                <form action="/" method="get">
+                                    <label>
+                                        <input
+                                            class="input__item"
+                                            name="email"
+                                            type="email"
+                                            placeholder="Enter your email" />
+                                    </label>
+                                    <img
+                                        class="input__icon input__icon--send"
+                                        type="submit"
+                                        src="img/icons/send.png"
+                                        alt="Send" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="footer__block footer__block--2">
+                        <div class="copyright">
+                            © All right reserved. Fashionee 2020
+                        </div>
+                        <div class="payment">
+                            Payment methods:
+                            <div class="payment__inner">
+                                <a class="payment__link" href="#">
+                                    <img
+                                        src="img/payment/visa.png"
+                                        alt="VISA" />
+                                </a>
+                                <a class="payment__link" href="#">
+                                    <img
+                                        src="img/payment/master.png"
+                                        alt="Master" />
+                                </a>
+                                <a class="payment__link" href="#">
+                                    <img
+                                        src="img/payment/paypal.png"
+                                        alt="PayPal" />
+                                </a>
+                                <a class="payment__link" href="#">
+                                    <img
+                                        src="img/payment/payoneer.png"
+                                        alt="PaYonner" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <img
+                    class="footer__img footer__img--small"
+                    src="img/small-dots.png"
+                    alt="Img" />
+                <img
+                    class="footer__img footer__img--big"
+                    src="img/footer.png"
+                    alt="Img" />
+            </div>
+        </footer>
+        <script src="js/app.js"></script>
+    </body>
+</html>

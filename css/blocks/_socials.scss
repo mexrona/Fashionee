@@ -1,0 +1,43 @@
+.socials {
+    margin-top: 35px;
+
+    &--code {
+        margin-top: 40px;
+    }
+}
+
+.socials__title {
+    @include font("Raleway", 500, 16px, 1.7, $black);
+}
+
+.socials__inner {
+    margin-top: 20px;
+}
+
+.socials__link {
+    padding-left: 25px;
+    margin-left: 15px;
+    @include font("Raleway", 600, 12px, 1.17, $gray);
+    position: relative;
+    transition: color 0.1s linear;
+
+    &::before {
+        @include element(10px, 1px, $gray);
+        top: 50%;
+        left: 0;
+        transform: translate(0, -50%);
+    }
+
+    &:first-child {
+        padding: 0;
+        margin: 0;
+    }
+
+    &:first-child::before {
+        display: none;
+    }
+
+    &:hover {
+        color: $red;
+    }
+}

@@ -1,0 +1,58 @@
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.nav__link {
+    @include font("Raleway", 500, 14px, 1.17, $gray);
+    transition: color 0.1s linear;
+    position: relative;
+
+    &--list {
+        padding-right: 17px;
+    }
+
+    &--list::after {
+        @include element(5px, 5px, transparent);
+        border-top: 1px solid $gray;
+        border-right: 1px solid $gray;
+        top: calc(50% - 3.5px);
+        right: 3.5px;
+        transform: translate(0, -50%) rotate(135deg);
+        transition: color 0.1s linear, border-color 0.1s linear;
+    }
+
+    &:hover,
+    &.active {
+        color: #ff8e8e;
+    }
+
+    &:hover::after,
+    &.active::after {
+        border-color: $red;
+    }
+}
+
+.nav__down {
+    position: relative;
+
+    &:hover .nav__link--list {
+        color: $red;
+    }
+
+    &:hover .nav__link--list::after {
+        border-color: $red;
+    }
+
+    &:hover .list {
+        display: block;
+        visibility: visible;
+    }
+}
+
+@media screen and (max-width: $laptop) {
+    .nav {
+        display: none;
+    }
+}

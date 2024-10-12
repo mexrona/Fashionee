@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="img/favicons/apple-touch-icon.png" />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="img/favicons/favicon-32x32.png" />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="img/favicons/favicon-16x16.png" />
+        <link rel="manifest" href="img/favicons/site.webmanifest" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet" />
+        <link rel="stylesheet" href="css/style.css" />
+        <title>Cart</title>
+    </head>
+    <body>
+        <header class="header">
+            <div class="container container--header">
+                <div class="header__inner">
+                    <div class="header__left">
+                        <div class="header__menu">
+                            <div class="burger">
+                                <div class="burger__item"></div>
+                            </div>
+                            <div class="logo">
+                                <img src="img/logo.png" alt="Fashionee" />
+                            </div>
+                            <div class="menu">
+                                <img src="img/icons/menu.png" alt="Menu" />
+                            </div>
+                        </div>
+                        <nav class="nav">
+                            <a class="nav__link" href="#">Home</a>
+                            <div class="nav__down">
+                                <a class="nav__link nav__link--list" href="#"
+                                    >Pages</a
+                                >
+                                <ul class="list">
+                                    <li>
+                                        <a class="list__link" href="#">About</a>
+                                    </li>
+                                    <li>
+                                        <a class="list__link" href="#">FAQ</a>
+                                    </li>
+                                    <li>
+                                        <a class="list__link" href="#"
+                                            >Collection</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a class="list__link" href="#"
+                                            >My profile</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a class="list__link" href="#"
+                                            >Log in</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a class="list__link" href="#"
+                                            >Registration</a
+                                        >
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="nav__down">
+                                <a
+                                    class="nav__link nav__link--list active"
+                                    href="#"
+                                    >Shop</a
+                                >
+                                <ul class="list">
+                                    <li>
+                                        <a class="list__link" href="#"
+                                            >Fashionee-Catton Shirt</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a class="list__link" href="#">Cart</a>
+                                    </li>
+                                    <li>
+                                        <a class="list__link" href="#"
+                                            >Wishlist</a
+                                        >
+                                    </li>
+                                </ul>
+                            </div>
+                            <a class="nav__link" href="#">Blog</a>
+                            <a class="nav__link" href="#">Contact</a>
+                        </nav>
+                    </div>
+                    <div class="header__right">
+                        <div class="header__item">
+                            <img
+                                class="header__icon"
+                                src="img/icons/search.png"
+                                alt="Search" />
+                        </div>
+                        <div class="header__item">
+                            <img
+                                class="header__icon"
+                                src="img/icons/user.png"
+                                alt="My profile" />
+                        </div>
+                        <div class="header__item">
+                            <img
+                                class="header__icon"
+                                src="img/icons/heart.png"
+                                alt="Wishlist" />
+                            <div class="header__count">0</div>
+                        </div>
+                        <div class="header__item">
+                            <img
+                                class="header__icon"
+                                src="img/icons/shopping-bag.png"
+                                alt="Cart" />
+                            <div class="header__count">2</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main>
+            <section class="intro">
+                <div class="container container--intro">
+                    <div class="intro__inner">
+                        <h1 class="intro__title">Cart</h1>
+                        <h2 class="intro__subtitle">
+                            Home<span>Shop</span><span>Cart</span>
+                        </h2>
+                        <div class="intro__img intro__img--dots">
+                            <img src="img/intro/dots.png" alt="Dots" />
+                        </div>
+                        <div class="intro__img intro__img--background">
+                            <img
+                                src="img/intro/background.png"
+                                alt="Background" />
+                        </div>
+                    </div>
+                </div>
+                <div class="intro__line"></div>
+            </section>
+            <section class="container container--cart">
+                <div class="cart">
+                    <div class="cart__inner">
+                        <div class="cart__item">
+                            <a class="cart__preview" href="#">
+                                <img
+                                    class="cart__img"
+                                    src="/"
+                                    alt="Fashionee - catton shirt (S)" />
+                            </a>
+                            <div class="cart__content">
+                                <a class="cart__name" href="#">
+                                    Fashionee - catton shirt (S)
+                                </a>
+                                <div class="cart__info">
+                                    <div class="cart__data">
+                                        <div class="cart__price">
+                                            <div class="cart__old">
+                                                &#36;52.99
+                                            </div>
+                                            <div class="cart__new">
+                                                &#36;35.99
+                                            </div>
+                                        </div>
+                                        <div class="cart__count">
+                                            <span class="cart__minus"></span>
+                                            1
+                                            <span class="cart__plus"></span>
+                                        </div>
+                                    </div>
+                                    <div class="cart__main">&#36;35.99</div>
+                                </div>
+                            </div>
+                            <div class="cart__arrow"></div>
+                        </div>
+                        <div class="cart__item">
+                            <a class="cart__preview" href="#">
+                                <img
+                                    class="cart__img"
+                                    src="/"
+                                    alt="Spray wrap skirt" />
+                            </a>
+                            <div class="cart__content">
+                                <a class="cart__name" href="#"
+                                    >Spray wrap skirt</a
+                                >
+                                <div class="cart__info">
+                                    <div class="cart__data">
+                                        <div class="cart__price">
+                                            <div
+                                                class="cart__old"
+                                                style="display: none"></div>
+                                            <div class="cart__new">
+                                                &#36;110.99
+                                            </div>
+                                        </div>
+                                        <div class="cart__count">
+                                            <span class="cart__minus"></span>
+                                            1
+                                            <span class="cart__plus"></span>
+                                        </div>
+                                    </div>
+                                    <div class="cart__main">&#36;110.99</div>
+                                </div>
+                            </div>
+                            <div class="cart__arrow"></div>
+                        </div>
+                    </div>
+                    <div class="order">
+                        <h3 class="order__title">Your Order</h3>
+                        <div class="order__inner">
+                            <div class="order__item">
+                                Оrder price
+                                <span class="order__price">&#36;146.98</span>
+                            </div>
+                            <div class="order__item">
+                                Discount for promo code
+                                <span class="order__status">No</span>
+                            </div>
+                            <div class="order__item">
+                                <span
+                                    >Delivery
+                                    <span class="order__time"
+                                        >(Aug 02 at 16:00)</span
+                                    ></span
+                                >
+                                <span class="order__price">&#36;16</span>
+                            </div>
+                        </div>
+                        <div class="order__total">
+                            Total
+                            <span class="order__price order__price--total"
+                                >&#36;162.98</span
+                            >
+                        </div>
+                        <div class="button button--order">Checkout</div>
+                    </div>
+                    <div class="code">
+                        <h3 class="code__title">You have a promo code?</h3>
+                        <p class="code__text">
+                            To receive up-to-date promotional codes, subscribe
+                            to us on social networks.
+                        </p>
+                        <form action="/" method="get">
+                            <div class="code__input">
+                                <div class="input input--code">
+                                    <label>
+                                        <input
+                                            class="input__item"
+                                            name="code"
+                                            type="text"
+                                            placeholder="Enter promo code" />
+                                    </label>
+                                </div>
+                                <button
+                                    class="button button--code"
+                                    type="submit">
+                                    <span class="code__arrow"></span>
+                                </button>
+                            </div>
+                        </form>
+                        <div class="socials socials--code">
+                            <h3 class="socials__title">Find us here:</h3>
+                            <div class="socials__inner">
+                                <a
+                                    class="socials__link"
+                                    href="#"
+                                    target="_blank"
+                                    >FB</a
+                                >
+                                <a
+                                    class="socials__link"
+                                    href="#"
+                                    target="_blank"
+                                    >TW</a
+                                >
+                                <a
+                                    class="socials__link"
+                                    href="#"
+                                    target="_blank"
+                                    >INS</a
+                                >
+                                <a
+                                    class="socials__link"
+                                    href="#"
+                                    target="_blank"
+                                    >PT</a
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer class="footer footer--cart">
+            <div class="container container--footer">
+                <div class="footer__inner">
+                    <div class="footer__block footer__block--1">
+                        <div class="footer__column footer__column--1">
+                            <div class="logo">
+                                <img src="img/logo.png" alt="Logo" />
+                            </div>
+                            <p class="footer__text footer__text--1">
+                                Cillum eu id enim aliquip aute ullamco.
+                                <br />
+                                Culpa deserunt nostrud excepteur voluptate.
+                            </p>
+                            <div class="socials">
+                                <h3 class="socials__title">Find us here:</h3>
+                                <div class="socials__inner">
+                                    <a
+                                        class="socials__link"
+                                        href="#"
+                                        target="_blank"
+                                        >FB</a
+                                    >
+                                    <a
+                                        class="socials__link"
+                                        href="#"
+                                        target="_blank"
+                                        >TW</a
+                                    >
+                                    <a
+                                        class="socials__link"
+                                        href="#"
+                                        target="_blank"
+                                        >INS</a
+                                    >
+                                    <a
+                                        class="socials__link"
+                                        href="#"
+                                        target="_blank"
+                                        >PT</a
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer__column footer__column--2">
+                            <div class="footer__item">
+                                <h5 class="footer__title">About</h5>
+                                <div class="footer__list">
+                                    <a
+                                        class="footer__text footer__text--link"
+                                        href="#"
+                                        >About us</a
+                                    >
+                                    <a
+                                        class="footer__text footer__text--link"
+                                        href="#"
+                                        >Collections</a
+                                    >
+                                    <a
+                                        class="footer__text footer__text--link"
+                                        href="#"
+                                        >Shop</a
+                                    >
+                                    <a
+                                        class="footer__text footer__text--link"
+                                        href="#"
+                                        >Blog</a
+                                    >
+                                    <a
+                                        class="footer__text footer__text--link"
+                                        href="#"
+                                        >Contact us</a
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer__column footer__column--3">
+                            <div class="footer__item">
+                                <h5 class="footer__title">Useful Links</h5>
+                                <div class="footer__list">
+                                    <a
+                                        class="footer__text footer__text--link"
+                                        href="#"
+                                        >Privacy Policy</a
+                                    >
+                                    <a
+                                        class="footer__text footer__text--link"
+                                        href="#"
+                                        >Terms of use</a
+                                    >
+                                    <a
+                                        class="footer__text footer__text--link"
+                                        href="#"
+                                        >Support</a
+                                    >
+                                    <a
+                                        class="footer__text footer__text--link"
+                                        href="#"
+                                        >Shipping details</a
+                                    >
+                                    <a
+                                        class="footer__text footer__text--link"
+                                        href="#"
+                                        >FAQs</a
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="footer__column footer__column--4">
+                            <h5
+                                class="newsletter__title newsletter__title--footer">
+                                Newsletter
+                            </h5>
+                            <p class="newsletter__text">
+                                Subscribe to be the first to hear about deals,
+                                offers and upcoming collections.
+                            </p>
+                            <div class="input input--footer">
+                                <form action="/" method="get">
+                                    <label>
+                                        <input
+                                            class="input__item"
+                                            name="email"
+                                            type="email"
+                                            placeholder="Enter your email" />
+                                    </label>
+                                    <img
+                                        class="input__icon input__icon--send"
+                                        type="submit"
+                                        src="img/icons/send.png"
+                                        alt="Send" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="footer__block footer__block--2">
+                        <div class="copyright">
+                            © All right reserved. Fashionee 2020
+                        </div>
+                        <div class="payment">
+                            Payment methods:
+                            <div class="payment__inner">
+                                <a class="payment__link" href="#">
+                                    <img
+                                        src="img/payment/visa.png"
+                                        alt="VISA" />
+                                </a>
+                                <a class="payment__link" href="#">
+                                    <img
+                                        src="img/payment/master.png"
+                                        alt="Master" />
+                                </a>
+                                <a class="payment__link" href="#">
+                                    <img
+                                        src="img/payment/paypal.png"
+                                        alt="PayPal" />
+                                </a>
+                                <a class="payment__link" href="#">
+                                    <img
+                                        src="img/payment/payoneer.png"
+                                        alt="PaYonner" />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <img
+                    class="footer__img footer__img--small"
+                    src="img/small-dots.png"
+                    alt="Img" />
+                <img
+                    class="footer__img footer__img--big"
+                    src="img/footer.png"
+                    alt="Img" />
+            </div>
+        </footer>
+        <script src="js/app.js"></script>
+    </body>
+</html>

@@ -1,0 +1,45 @@
+.input {
+    padding: 0 20px 16px 0;
+    border-bottom: 1px solid rgba($gray, 0.2);
+    position: relative;
+
+    &--newsletter {
+        min-width: 334px;
+    }
+
+    &--footer {
+        margin-top: 36px;
+    }
+
+    &--code {
+        width: 100%;
+        margin-right: 30px;
+    }
+}
+
+.input__item,
+.input__item::placeholder {
+    @include font("Raleway", 400, 14px, 1.7, rgba($gray, 0.5));
+}
+
+.input__item {
+    width: 100%;
+}
+
+.input__icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    &--send {
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: $mobile) {
+    .input {
+        &--newsletter {
+            min-width: 100%;
+        }
+    }
+}

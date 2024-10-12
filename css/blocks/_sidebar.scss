@@ -1,0 +1,49 @@
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    row-gap: 50px;
+    width: 100%;
+    max-width: 244px;
+}
+
+.sidebar__title {
+    padding-bottom: 14px;
+    margin-bottom: 30px;
+    @include font("Josefin Sans", 400, 24px, 1.2, $black);
+    border-bottom: 2px solid $black;
+}
+
+.sidebar__deploy {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: fit-content;
+    @include font("Raleway", 600, 16px, 1, $gray);
+    cursor: pointer;
+    transition: color 0.1s linear;
+
+    &:hover,
+    &.active {
+        color: $red;
+    }
+
+    &:hover .arrow,
+    &.active .arrow {
+        background-color: $red;
+    }
+
+    &:hover .arrow::before,
+    &.active .arrow::before {
+        border-bottom-color: $red;
+    }
+
+    &.active .arrow {
+        transform: rotate(180deg);
+    }
+}
+
+@media screen and (max-width: $tablet) {
+    .sidebar {
+        margin: 0 auto;
+    }
+}

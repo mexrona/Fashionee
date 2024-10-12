@@ -1,0 +1,144 @@
+.catalog {
+    width: 100%;
+    max-width: 846px;
+}
+
+.catalog__header,
+.catalog__filter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.catalog__header {
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.catalog__text {
+    @include font("Raleway", 400, 16px, 1.7, $gray);
+
+    & span {
+        font-weight: 600;
+    }
+}
+
+.catalog__filter {
+    width: 100%;
+    max-width: 214px;
+    padding-bottom: 18px;
+    @include font("Raleway", 400, 14px, 1.7, $black);
+    border-bottom: 1px solid rgba($gray, 0.2);
+    cursor: pointer;
+    transition: color 0.1s linear;
+
+    &:hover {
+        color: $red;
+    }
+
+    &:hover .arrow {
+        background-color: $red;
+    }
+
+    &:hover .arrow::before {
+        border-top-color: $red;
+    }
+}
+
+.catalog__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 30px;
+    row-gap: 50px;
+    margin-top: 28px;
+}
+
+.catalog__item {
+    width: 100%;
+    max-width: 262px;
+    position: relative;
+}
+
+.catalog__preview {
+    display: block;
+    width: 100%;
+    height: 360px;
+    background-color: $white-two;
+}
+
+.catalog__img {
+    width: 100%;
+}
+
+.catalog__status {
+    width: fit-content;
+    padding: 5px 10px;
+    @include font("Raleway", 800, 10px, 1, $white);
+    text-transform: uppercase;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+
+    &--sale {
+        background-color: $red;
+    }
+
+    &--new {
+        background-color: $green;
+    }
+}
+
+.catalog__heart {
+    width: 19px;
+    height: 18px;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    &.favorite {
+        background: url(../../img/icons/red-heart.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+}
+
+.catalog__name {
+    margin-top: 20px;
+    @include font("Raleway", 400, 16px, 1.7, $gray);
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.catalog__price {
+    display: flex;
+    align-items: center;
+    column-gap: 16px;
+    margin-top: 10px;
+}
+
+.catalog__new {
+    @include font("Josefin Sans", 400, 20px, 1, $black);
+}
+
+.catalog__old {
+    @include font("Josefin Sans", 300, 16px, 1, $gray);
+    text-decoration: line-through;
+}
+
+.catalog__buy {
+    width: 100%;
+    margin-top: 10px;
+    @include font("Raleway", 500, 16px, 1.7, $gray);
+    text-align: center;
+    border: 1px solid $gray;
+    border-radius: 4px;
+    transition: opacity 0.1s linear;
+
+    &:hover {
+        opacity: 0.6;
+    }
+}

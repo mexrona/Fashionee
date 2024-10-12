@@ -1,0 +1,33 @@
+.button {
+    width: 100%;
+    padding: 17px 0;
+    @include font("Raleway", 600, 16px, 1, $white);
+    text-align: center;
+    background-color: $black;
+    cursor: pointer;
+    position: relative;
+    transition: opacity 0.1s linear;
+
+    &--newsletter {
+        max-width: 140px;
+    }
+
+    &--order {
+        margin-top: 20px;
+    }
+
+    &--code {
+        max-width: 54px;
+        height: 50px;
+    }
+
+    &::after {
+        @include element(2px, 100%, $white);
+        top: 0;
+        right: 2px;
+    }
+
+    &:hover {
+        opacity: 0.9;
+    }
+}

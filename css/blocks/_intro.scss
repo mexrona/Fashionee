@@ -1,0 +1,77 @@
+.intro {
+    padding-top: 70px;
+}
+
+.intro__inner {
+    padding: 193px 0 132px 330px;
+    position: relative;
+}
+
+.intro__title {
+    margin-bottom: 21px;
+    @include font("Josefin Sans", 400, 80px, 1, $black);
+}
+
+.intro__subtitle {
+    padding: 0.5px 0 0.5px 13.5px;
+    @include font("Raleway", 500, 14px, 1, $black);
+    border-left: 1.5px solid $black;
+
+    & span:nth-last-child(1),
+    & span:nth-last-child(2) {
+        margin-left: 12px;
+    }
+
+    & span:nth-last-child(1) {
+        color: $red;
+    }
+}
+
+.intro__img {
+    max-width: 100%;
+    position: absolute;
+    z-index: -1;
+
+    &--dots {
+        top: 82px;
+        left: 0;
+    }
+
+    &--background {
+        top: 50px;
+        right: 60px;
+    }
+}
+
+.intro__line {
+    width: 44%;
+    max-width: 850px;
+    height: 2px;
+    background-color: $black;
+    position: absolute;
+    top: 408px;
+    left: 0;
+    z-index: -1;
+}
+
+@media screen and (max-width: $laptop) {
+    .intro__img {
+        display: none;
+    }
+
+    .intro__inner {
+        padding-left: 230px;
+    }
+}
+
+@media screen and (max-width: $tablet) {
+    .intro__inner {
+        padding-left: 130px;
+    }
+}
+
+@media screen and (max-width: $mobile) {
+    .intro__inner {
+        padding-left: 0;
+    }
+}

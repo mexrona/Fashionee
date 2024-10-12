@@ -1,0 +1,54 @@
+.colors__inner {
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+    padding-left: 20px;
+}
+
+.colors__item {
+    display: flex;
+    align-items: center;
+    column-gap: 14px;
+    width: fit-content;
+    @include font("Raleway", 400, 14px, 1.7, $gray);
+    transition: color 0.1s linear;
+}
+
+.colors__item:hover,
+.colors__item.active {
+    color: $red;
+}
+
+.colors__item:hover .colors__checkbox {
+    border-color: $red;
+}
+
+.colors__item.active .colors__checkbox {
+    border-color: $white-one;
+}
+
+.colors__item.active .colors__checkarrow {
+    display: block;
+}
+
+.colors__checkbox {
+    width: 15px;
+    height: 15px;
+    border: 1px solid $gray;
+    border-radius: 0;
+    cursor: pointer;
+    position: relative;
+    transition: border 0.1s linear;
+}
+
+.colors__checkarrow {
+    display: none;
+    position: absolute;
+    top: calc(50% + 1px);
+    left: calc(50% - 1px);
+    transform: translate(-50%, -50%);
+}
+
+.colors__label {
+    cursor: pointer;
+}

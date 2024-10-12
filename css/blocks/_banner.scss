@@ -1,0 +1,76 @@
+.banner {
+    background-color: $black;
+
+    &--sidebar {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+.banner__inner {
+    border: 2px solid $white;
+
+    &--sidebar {
+        padding: 75px 15px 75px 40px;
+    }
+}
+
+.banner__suptitle {
+    @include font("Raleway", 600, 24px, 1, $white);
+    text-transform: uppercase;
+    letter-spacing: 0.42em;
+}
+
+.banner__title {
+    margin-top: 6px;
+    @include font("Raleway", 800, 60px, 1, $white);
+    text-transform: uppercase;
+}
+
+.banner__text {
+    margin-top: 30px;
+    @include font("Raleway", 500, 14px, 1.5, $white);
+}
+
+.banner__link {
+    display: block;
+    width: fit-content;
+    padding-left: 39px;
+    margin-top: 30px;
+    @include font("Raleway", 600, 16px, 1, $white);
+    position: relative;
+    transition: width 0.1s linear, padding 0.1s linear;
+
+    &::before {
+        @include element(25px, 2px, $white);
+        top: 50%;
+        left: 0;
+        transform: translate(0, -50%);
+        transition: left 0.1s linear, right 0.1s linear;
+    }
+
+    &::after {
+        @include element(10px, 10px, transparent);
+        visibility: hidden;
+        border-top: 2px solid $white;
+        border-right: 2px solid $white;
+        top: 50%;
+        right: 53px;
+        transform: translate(0, -50%) rotate(45deg);
+        transition: visibility 0.1s linear;
+    }
+
+    &:hover {
+        width: 100%;
+        padding-left: 0;
+    }
+
+    &:hover::before {
+        left: auto;
+        right: 52px;
+    }
+
+    &:hover::after {
+        visibility: visible;
+    }
+}

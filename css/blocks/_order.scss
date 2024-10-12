@@ -1,0 +1,62 @@
+.order {
+    width: 100%;
+    max-width: 360px;
+    padding: 40px;
+    border: 1px solid rgba($gray, 0.1);
+}
+
+.order__title {
+    @include font("Josefin Sans", 400, 32px, 1.2, $black);
+}
+
+.order__inner,
+.order__item,
+.order__total {
+    margin-top: 20px;
+}
+
+.order__item,
+.order__total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.order__item {
+    padding-bottom: 15px;
+    @include font("Raleway", 400, 16px, 1.7, $gray);
+    border-bottom: 1px solid rgba($gray, 0.1);
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    &:last-child {
+        border-bottom: 2px solid $black;
+    }
+}
+
+.order__price {
+    @include font("Josefin Sans", 400, 20px, 1, $gray);
+
+    &--total {
+        font-size: 25px;
+        color: $black;
+    }
+}
+
+.order__time {
+    margin-left: 9px;
+    @include font("Raleway", 400, 14px, 1.7, $gray);
+}
+
+.order__total {
+    @include font("Raleway", 400, 20px, 1.7, $black);
+}
+
+@media screen and (max-width: $mobile) {
+    .order {
+        padding: 0;
+        border: none;
+    }
+}

@@ -1,0 +1,136 @@
+.footer {
+    border-top: 20px solid $white-one;
+    position: relative;
+
+    &--shop {
+        margin-top: 120px;
+    }
+
+    &--cart {
+        margin-top: 250px;
+    }
+}
+
+.footer__inner {
+    padding: 110px 0 23px;
+}
+
+.footer__block {
+    display: flex;
+
+    &--1 {
+        align-items: start;
+        padding-bottom: 88px;
+        border-bottom: 1px solid rgba($gray, 0.2);
+    }
+
+    &--2 {
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+}
+
+.footer__column {
+    width: 100%;
+
+    &--1 {
+        max-width: 337px;
+    }
+
+    &--2 {
+        max-width: 196px;
+    }
+
+    &--3 {
+        max-width: 227px;
+    }
+
+    &--4 {
+        max-width: 381px;
+        padding-left: 20px;
+    }
+}
+
+.footer__text {
+    @include font("Raleway", 400, 14px, 1.7, $gray);
+
+    &--1 {
+        padding-bottom: 25px;
+        margin-top: 25px;
+        border-bottom: 1px solid rgba($gray, 0.2);
+    }
+
+    &--link {
+        padding-left: 15px;
+        position: relative;
+
+        &::before {
+            @include element(3px, 3px, $gray);
+            top: 50%;
+            left: 0;
+            transform: translate(0, -50%);
+        }
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.footer__title {
+    @include font("Josefin Sans", 400, 20px, 1.2, $black);
+}
+
+.footer__item {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.footer__list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+    margin-top: 20px;
+}
+
+.footer__img {
+    position: absolute;
+    z-index: 0;
+
+    &--small {
+        top: 30px;
+        left: 30px;
+    }
+
+    &--big {
+        top: 85px;
+        right: 30px;
+    }
+}
+
+@media screen and (max-width: $large) {
+    .footer__img {
+        display: none;
+    }
+}
+
+@media screen and (max-width: $desktop) {
+    .footer__block {
+        &--1 {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 50px;
+        }
+    }
+}
+
+@media screen and (max-width: $tablet) {
+    .footer__block {
+        &--2 {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+    }
+}

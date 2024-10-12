@@ -1,0 +1,38 @@
+.categories__inner {
+    padding: 0 0 12px 20px;
+}
+
+.categories__item {
+    width: fit-content;
+    padding-left: 17px;
+    margin-top: 12px;
+    @include font("Raleway", 400, 16px, 1.7, $gray);
+    cursor: pointer;
+    position: relative;
+    transition: padding 0.1s linear, color 0.1s linear;
+
+    &:first-child {
+        margin-top: 0;
+    }
+
+    &::before {
+        @include element(5px, 5px, $gray);
+        top: 50%;
+        left: 0;
+        transform: translate(0, -50%);
+        transition: width 0.1s linear, height 0.1s linear, 0.1s linear;
+    }
+
+    &:hover,
+    &.active {
+        padding-left: 37px;
+        color: $red;
+    }
+
+    &:hover::before,
+    &.active::before {
+        width: 25px;
+        height: 2px;
+        background-color: $red;
+    }
+}

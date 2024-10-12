@@ -1,0 +1,10 @@
+.menu {
+    display: none;
+    cursor: pointer;
+}
+
+@media screen and (max-width: $laptop) {
+    .menu {
+        display: block;
+    }
+}

@@ -1,0 +1,16 @@
+@mixin element($wd, $hg, $bc) {
+    content: "";
+    display: block;
+    width: $wd;
+    height: $hg;
+    background-color: $bc;
+    position: absolute;
+}
+
+@mixin font($ff, $fw, $fz, $lh, $cl) {
+    font-family: $ff, sans-serif;
+    font-weight: $fw;
+    font-size: $fz;
+    line-height: $lh;
+    color: $cl;
+}

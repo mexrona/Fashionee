@@ -1,0 +1,41 @@
+.code {
+    width: 100%;
+    max-width: 375px;
+}
+
+.code__title {
+    @include font("Josefin Sans", 400, 32px, 1.2, $black);
+    text-transform: capitalize;
+}
+
+.code__text {
+    margin-top: 20px;
+    @include font("Raleway", 400, 16px, 1.7, $gray);
+}
+
+.code__input {
+    display: flex;
+    align-items: end;
+    width: 100%;
+    max-width: 334px;
+    margin-top: 40px;
+}
+
+.code__arrow {
+    width: 20px;
+    height: 1.5px;
+    background-color: $white;
+    position: absolute;
+    top: 50%;
+    left: calc(50% - 4px);
+    transform: translate(-50%, -50%);
+
+    &::after {
+        @include element(7.5px, 7.5px, transparent);
+        border-top: 1.5px solid $white;
+        border-right: 1.5px solid $white;
+        top: 50%;
+        right: 0;
+        transform: translate(0, -50%) rotate(45deg);
+    }
+}

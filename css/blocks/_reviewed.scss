@@ -1,0 +1,51 @@
+.reviewed__inner {
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 20px;
+}
+
+.reviewed__item {
+    display: flex;
+    column-gap: 15px;
+    width: 100%;
+}
+
+.reviewed__preview {
+    display: block;
+    width: 100%;
+    max-width: 75px;
+    height: 100%;
+    min-height: 85px;
+    background-color: $white-two;
+}
+
+.reviewed__img {
+    display: none;
+}
+
+.reviewed__info {
+    padding-top: 15px;
+}
+
+.reviewed__name {
+    @include font("Raleway", 400, 14px, 1.4, $gray);
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.reviewed__price {
+    display: flex;
+    column-gap: 10px;
+    margin-top: 5px;
+}
+
+.reviewed__new {
+    @include font("Josefin Sans", 400, 14px, 1, $black);
+}
+
+.reviewed__old {
+    @include font("Josefin Sans", 300, 12px, 1, $gray);
+    text-decoration: line-through;
+}

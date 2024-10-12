@@ -1,0 +1,41 @@
+.price__inner {
+    padding-bottom: 3px;
+    position: relative;
+}
+
+.price__block {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 50px 15px;
+    border-bottom: 2px solid $white-one;
+}
+
+.price__item {
+    @include font("Josefin Sans", 400, 12px, 1, $gray);
+}
+
+.price__element {
+    width: 50%;
+    height: 2px;
+    background-color: $red;
+    position: absolute;
+    bottom: 3px;
+    left: 50%;
+    position: relative;
+    transform: translate(-50%, 0);
+
+    &::before,
+    &::after {
+        @include element(12px, 12px, $red);
+        top: 50%;
+        transform: translate(0, -50%);
+    }
+
+    &::before {
+        left: 0;
+    }
+
+    &::after {
+        right: 0;
+    }
+}

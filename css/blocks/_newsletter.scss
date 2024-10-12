@@ -1,0 +1,66 @@
+.newsletter {
+    margin-top: 200px;
+}
+
+.newsletter__inner {
+    padding-bottom: 162px;
+    background-color: $white-two;
+}
+
+.newsletter__block {
+    width: 100%;
+    max-width: 1130px;
+    margin: 0 auto;
+}
+
+.newsletter__item {
+    width: 100%;
+    max-width: 624px;
+    padding: 60px;
+    background-color: $white;
+    position: relative;
+}
+
+.newsletter__title {
+    @include font("Josefin Sans", 400, 32px, 1.2, $black);
+
+    &--footer {
+        font-size: 20px;
+    }
+}
+
+.newsletter__text {
+    margin-top: 16px;
+    @include font("Raleway", 400, 14px, 1.7, $gray);
+}
+
+.newsletter__input {
+    display: flex;
+    align-items: flex-end;
+    column-gap: 30px;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.newsletter__img {
+    position: absolute;
+    top: -33px;
+    right: 30px;
+}
+
+@media screen and (max-width: $tablet) {
+    .newsletter__input {
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+}
+
+@media screen and (max-width: $mobile) {
+    .newsletter__item {
+        padding: 0;
+    }
+
+    .newsletter__img {
+        display: none;
+    }
+}
