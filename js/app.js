@@ -1,3 +1,94 @@
+// Fixed Header
+const header = document.getElementById("header");
+
+window.addEventListener("scroll", () => {
+    let scrollPos = window.scrollY;
+
+    if (scrollPos > 0) {
+        header.classList.add("fixed");
+    } else {
+        header.classList.remove("fixed");
+    }
+});
+
+// Local Storage
+const PRODUCT_IN_BASKET_KEY = "product-in-basket";
+
+const getFromLS = (key) => {
+    try {
+        return JSON.parse(localStorage.getItem(key));
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+const setToLS = (key, value) => {
+    try {
+        localStorage.setItem(key, JSON.stringify(value));
+    } catch (e) {
+        console.log(e);
+    }
+};
+
+const updateHeaderInfo = () => {
+    const basketCounter = document.getElementById("cart");
+
+    if (!basketCounter) {
+        return false;
+    }
+
+    const productsInBasket = getFromLS(PRODUCT_IN_BASKET_KEY);
+
+    if (!productsInBasket) {
+        return false;
+    }
+
+    let countInBasket = 0;
+
+    productsInBasket.forEach((product) => {
+        countInBasket += product.quantity;
+    });
+
+    basketCounter.innerHTML = countInBasket;
+};
+
+const buyProduct = (product) => {
+    const productsInBasket = getFromLS(PRODUCT_IN_BASKET_KEY);
+
+    if (!productsInBasket) {
+        setToLS(PRODUCT_IN_BASKET_KEY, [{...product, quantity: 1}]);
+        updateHeaderInfo();
+        return true;
+    }
+
+    let hasProductInBasket = false;
+
+    const updatedProducts = productsInBasket.map((productInBasket) => {
+        if (productInBasket.id === product.id) {
+            hasProductInBasket = true;
+
+            return {
+                ...productInBasket,
+                quantity: productInBasket.quantity + 1,
+            };
+        }
+
+        return productInBasket;
+    });
+
+    if (hasProductInBasket) {
+        setToLS(PRODUCT_IN_BASKET_KEY, updatedProducts);
+        updateHeaderInfo();
+        return true;
+    }
+
+    productsInBasket.push({...product, quantity: 1});
+
+    setToLS(PRODUCT_IN_BASKET_KEY, productsInBasket);
+    updateHeaderInfo();
+};
+
+// Products
 const products = [
     {
         id: 1,
@@ -341,6 +432,9 @@ const createProduct = (product) => {
     const catalogBuy = document.createElement("button");
     catalogBuy.classList.add("catalog__buy");
     catalogBuy.innerHTML = "Купить";
+    catalogBuy.addEventListener("click", () => {
+        buyProduct(product);
+    });
 
     productWrapper.appendChild(catalogBuy);
 
@@ -357,22 +451,9 @@ const createProductList = (products) => {
 
 createProductList(products);
 
-// Fixed Header
-const header = document.getElementById("header");
-
-window.addEventListener("scroll", () => {
-    let scrollPos = window.scrollY;
-
-    if (scrollPos > 0) {
-        header.classList.add("fixed");
-    } else {
-        header.classList.remove("fixed");
-    }
-});
-
 // Favorites
 const hearts = document.querySelectorAll(".catalog__heart");
-const count = document.querySelector(".header__count");
+const heartsCount = document.querySelector(".header__count");
 
 hearts.forEach((heart) => {
     heart.addEventListener("click", () => {
@@ -383,6 +464,6 @@ hearts.forEach((heart) => {
         }
 
         const clicks = document.querySelectorAll(".favorite");
-        count.textContent = clicks.length;
+        heartsCount.textContent = clicks.length;
     });
 });
