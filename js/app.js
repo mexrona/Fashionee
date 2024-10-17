@@ -15,12 +15,9 @@ window.addEventListener("scroll", () => {
     checkScroll();
 });
 
-window.onload = () => {
-    checkScroll();
-};
-
 // Local Storage
 const PRODUCT_IN_BASKET_KEY = "product-in-basket";
+const FAVORITE_PRODUCT_KEY = "favorite-product";
 
 const getFromLS = (key) => {
     try {
@@ -97,60 +94,69 @@ const buyProduct = (product) => {
 };
 
 const updateFavoriteInfo = () => {
-    const heartCounter = document.getElementById("heart");
+    const favoriteCounter = document.getElementById("heart");
 
-    if (!heartCounter) {
+    if (!favoriteCounter) {
         return false;
     }
 
-    const productsInFavorite = getFromLS(PRODUCT_IN_BASKET_KEY);
+    const favoriteProducts = getFromLS(FAVORITE_PRODUCT_KEY);
 
-    if (!productsInFavorite) {
+    if (!favoriteProducts) {
         return false;
     }
 
-    let countInFavorite = 0;
+    let countOfFavorite = 0;
 
-    productsInFavorite.forEach((product) => {
-        countInFavorite += product.favorite;
+    favoriteProducts.forEach((product) => {
+        countOfFavorite += product.isFavorite;
     });
 
-    heartCounter.innerHTML = countInFavorite;
+    favoriteCounter.innerHTML = countOfFavorite;
 };
 
 const addFavorite = (product) => {
-    const productsInFavorite = getFromLS(PRODUCT_IN_BASKET_KEY);
+    const favoriteProducts = getFromLS(FAVORITE_PRODUCT_KEY);
 
-    if (!productsInFavorite) {
-        setToLS(PRODUCT_IN_BASKET_KEY, [{...product, favorite: 1}]);
+    if (!favoriteProducts) {
+        setToLS(FAVORITE_PRODUCT_KEY, [{...product, isFavorite: 1}]);
         updateFavoriteInfo();
         return true;
     }
 
-    let hasProductInFavorite = false;
+    let hasFavoriteProduct = false;
 
-    const updatedProducts = productsInFavorite.map((productInFavorite) => {
-        if (productInFavorite.id === product.id) {
-            hasProductInFavorite = true;
+    const updatedProducts = favoriteProducts.map((favoriteProduct) => {
+        if (favoriteProduct.id === product.id) {
+            hasFavoriteProduct = true;
 
-            return {
-                ...productInFavorite,
-                favorite: productInFavorite.favorite - 1,
-            };
+            if (favoriteProduct.isFavorite === 1) {
+                return {
+                    ...favoriteProduct,
+                    isFavorite: favoriteProduct.isFavorite - 1,
+                };
+            }
+
+            if (favoriteProduct.isFavorite === 0) {
+                return {
+                    ...favoriteProduct,
+                    isFavorite: favoriteProduct.isFavorite + 1,
+                };
+            }
         }
 
-        return productInFavorite;
+        return favoriteProduct;
     });
 
-    if (hasProductInFavorite) {
-        setToLS(PRODUCT_IN_BASKET_KEY, updatedProducts);
+    if (hasFavoriteProduct) {
+        setToLS(FAVORITE_PRODUCT_KEY, updatedProducts);
         updateFavoriteInfo();
         return true;
     }
 
-    productsInFavorite.push({...product, favorite: 1});
+    favoriteProducts.push({...product, isFavorite: 1});
 
-    setToLS(PRODUCT_IN_BASKET_KEY, productsInFavorite);
+    setToLS(FAVORITE_PRODUCT_KEY, favoriteProducts);
     updateFavoriteInfo();
 };
 
@@ -461,12 +467,6 @@ const createProduct = (product) => {
     const catalogHeart = document.createElement("div");
     catalogHeart.classList.add("catalog__heart");
     catalogHeart.addEventListener("click", () => {
-        if (!catalogHeart.classList.contains("favorite")) {
-            catalogHeart.classList.add("favorite");
-        } else {
-            catalogHeart.classList.remove("favorite");
-        }
-
         addFavorite(product);
     });
 
@@ -525,3 +525,43 @@ const createProductList = (products) => {
 };
 
 createProductList(products);
+
+window.onload = () => {
+    checkScroll();
+    updateBasketInfo();
+    updateFavoriteInfo();
+};
+
+const hearts = document.querySelectorAll(".catalog__heart");
+
+for (let i = 0; i <= hearts.length; i++) {
+    const heart = hearts[i];
+
+    heart.dataset.heart = i + 1;
+
+    var checkFavorite = () => {
+        if (localStorage.getItem(`${heart.dataset.heart}`)) {
+            heart.classList.add("favorite");
+        }
+
+        if (!localStorage.getItem(`${heart.dataset.heart}`)) {
+            heart.classList.remove("favorite");
+        }
+    };
+
+    heart.addEventListener("click", () => {
+        if (!localStorage.getItem(`${heart.dataset.heart}`)) {
+            localStorage.setItem(`${heart.dataset.heart}`, "favorite");
+            heart.classList.add("favorite");
+            return;
+        }
+
+        if (localStorage.getItem(`${heart.dataset.heart}`)) {
+            localStorage.removeItem(`${heart.dataset.heart}`);
+            heart.classList.remove("favorite");
+            return;
+        }
+    });
+
+    checkFavorite();
+}
