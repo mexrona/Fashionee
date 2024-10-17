@@ -15,10 +15,23 @@ window.addEventListener("scroll", () => {
     checkScroll();
 });
 
-// Local Storage
 const PRODUCT_IN_BASKET_KEY = "product-in-basket";
 const FAVORITE_PRODUCT_KEY = "favorite-product";
 
+const debounce = (f, t) => {
+    return function (args) {
+        let previousCall = this.lastCall;
+        this.lastCall = Date.now();
+
+        if (previousCall && this.lastCall - previousCall <= t) {
+            clearTimeout(this.lastCallTimer);
+        }
+
+        this.lastCallTimer = setTimeout(() => f(args), t);
+    };
+};
+
+// Local Storage
 const getFromLS = (key) => {
     try {
         return JSON.parse(localStorage.getItem(key));
@@ -517,12 +530,53 @@ const createProduct = (product) => {
 };
 
 const createProductList = (products) => {
-    for (const product of products) {
-        const createdProduct = createProduct(product);
+    const jsProducts = document.getElementById("products");
 
-        document.getElementById("products").appendChild(createdProduct);
+    if (jsProducts) {
+        jsProducts.innerHTML = "";
+
+        for (const product of products) {
+            const createdProduct = createProduct(product);
+
+            jsProducts.appendChild(createdProduct);
+        }
     }
 };
+
+const filterProducts = (searchValue, filter, sort, pagination) => {
+    let filteredProducts = [...products];
+
+    if (searchValue) {
+        filteredProducts = filteredProducts.filter((product) => {
+            return product.name
+                .toLowerCase()
+                .includes(searchValue.toLowerCase());
+        });
+    }
+
+    const productsCount = filteredProducts.length;
+
+    return {
+        filteredProducts,
+        productsCount,
+    };
+};
+
+const updateProductsCount = (count) => {
+    document.getElementById("productsCount").innerHTML = count;
+};
+
+document.getElementById("search").addEventListener(
+    "keyup",
+    debounce((event) => {
+        const {filteredProducts, productsCount} = filterProducts(
+            event.target.value
+        );
+
+        createProductList(filteredProducts);
+        updateProductsCount(productsCount);
+    }, 500)
+);
 
 createProductList(products);
 
