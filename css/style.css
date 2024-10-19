@@ -714,6 +714,9 @@ h6 {
 .button:hover {
   opacity: 0.9;
 }
+.button:disabled {
+  opacity: 0.5;
+}
 
 .reviewed__inner {
   display: flex;

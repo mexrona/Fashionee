@@ -18,6 +18,17 @@ window.addEventListener("scroll", () => {
 const PRODUCT_IN_BASKET_KEY = "product-in-basket";
 const FAVORITE_PRODUCT_KEY = "favorite-product";
 
+const filter = {
+    /* category: "All",
+    price: {
+        min: 0,
+        max: 999999,
+    },
+    colors: [], */
+};
+
+let searchValue = "";
+
 const debounce = (f, t) => {
     return function (args) {
         let previousCall = this.lastCall;
@@ -554,6 +565,14 @@ const filterProducts = (searchValue, filter, sort, pagination) => {
         });
     }
 
+    if (Object.keys(filter)) {
+        if (filter.category) {
+            filteredProducts = filteredProducts.filter((product) => {
+                return product.categories.includes(filter.category);
+            });
+        }
+    }
+
     const productsCount = filteredProducts.length;
 
     return {
@@ -569,14 +588,69 @@ const updateProductsCount = (count) => {
 document.getElementById("search").addEventListener(
     "keyup",
     debounce((event) => {
+        searchValue = event.target.value;
         const {filteredProducts, productsCount} = filterProducts(
-            event.target.value
+            searchValue,
+            filter
         );
 
         createProductList(filteredProducts);
         updateProductsCount(productsCount);
     }, 500)
 );
+
+const applyFilter = document.getElementById("applyFilter");
+
+const toggleBlockFilterBtn = () => {
+    console.log(filter);
+
+    if (!Object.keys(filter).length || filter["category"] === "All") {
+        applyFilter.setAttribute("disabled", "disabled");
+        return;
+    } else {
+        applyFilter.removeAttribute("disabled");
+    }
+};
+
+const categoriesItems = document.querySelectorAll(".categories__item");
+
+categoriesItems.forEach((item) => {
+    item.addEventListener("click", () => {
+        for (let i = 0; i < categoriesItems.length; i++) {
+            if (categoriesItems[i] !== item) {
+                categoriesItems[i].classList.remove("active");
+            }
+        }
+
+        if (!item.classList.contains("active")) {
+            item.classList.add("active");
+        } else {
+            item.classList.remove("active");
+
+            document.querySelector(".categories__item").click();
+        }
+
+        if (item.classList.contains("active")) {
+            console.log(item.dataset.category);
+        }
+
+        filter["category"] = item.dataset.category;
+
+        toggleBlockFilterBtn();
+    });
+});
+
+applyFilter.addEventListener("click", () => {
+    const {filteredProducts, productsCount} = filterProducts(
+        searchValue,
+        filter
+    );
+
+    createProductList(filteredProducts);
+    updateProductsCount(productsCount);
+
+    toggleBlockFilterBtn();
+});
 
 createProductList(products);
 

@@ -173,11 +173,31 @@
                         <div class="categories">
                             <h2 class="sidebar__title">Categories</h2>
                             <div class="categories__inner">
-                                <div class="categories__item">All</div>
-                                <div class="categories__item active">Men</div>
-                                <div class="categories__item">Women</div>
-                                <div class="categories__item">Accessories</div>
-                                <div class="categories__item">New Arrivals</div>
+                                <div
+                                    class="categories__item active"
+                                    data-category="All">
+                                    All
+                                </div>
+                                <div
+                                    class="categories__item"
+                                    data-category="Men">
+                                    Men
+                                </div>
+                                <div
+                                    class="categories__item"
+                                    data-category="Women">
+                                    Women
+                                </div>
+                                <div
+                                    class="categories__item"
+                                    data-category="Accessories">
+                                    Accessories
+                                </div>
+                                <div
+                                    class="categories__item"
+                                    data-category="New Arrivals">
+                                    New Arrivals
+                                </div>
                             </div>
                         </div>
                         <div class="price">
@@ -284,7 +304,9 @@
                             <div class="arrow arrow--sidebar"></div>
                             Deploy
                         </div>
-                        <div class="button">Apply Filter</div>
+                        <button class="button" id="applyFilter" disabled>
+                            Apply Filter
+                        </button>
                         <div class="reviewed">
                             <h2 class="sidebar__title">Reviewed By You</h2>
                             <div class="reviewed__inner">
