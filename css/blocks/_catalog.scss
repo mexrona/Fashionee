@@ -43,6 +43,19 @@
     &:hover .arrow::before {
         border-top-color: $red;
     }
+
+    &:hover .catalog__select {
+        color: $red;
+    }
+
+    &:hover .catalog__select option {
+        color: $black;
+    }
+}
+
+.catalog__select {
+    @include font("Raleway", 400, 14px, 1.7, $black);
+    transition: color 0.1s linear;
 }
 
 .catalog__inner {

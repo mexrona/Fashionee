@@ -204,8 +204,16 @@
                             <h2 class="sidebar__title">Price</h2>
                             <div class="price__inner">
                                 <div class="price__block">
-                                    <div class="price__item">&#36;21.00</div>
-                                    <div class="price__item">&#36;187.99</div>
+                                    <input
+                                        type="text"
+                                        class="price__item"
+                                        id="priceMin"
+                                        placeholder="$21.00" />
+                                    <input
+                                        type="text"
+                                        class="price__item"
+                                        id="priceMax"
+                                        placeholder="$187.99" />
                                 </div>
                                 <div class="price__element"></div>
                             </div>
@@ -213,7 +221,7 @@
                         <div class="colors">
                             <h2 class="sidebar__title">Colors</h2>
                             <div class="colors__inner">
-                                <div class="colors__item">
+                                <div class="colors__item" data-color="Black">
                                     <span class="colors__checkbox">
                                         <img
                                             class="colors__checkarrow"
@@ -230,7 +238,7 @@
                                         >Black</label
                                     >
                                 </div>
-                                <div class="colors__item active">
+                                <div class="colors__item" data-color="Blue">
                                     <span class="colors__checkbox">
                                         <img
                                             class="colors__checkarrow"
@@ -247,7 +255,7 @@
                                         >Blue</label
                                     >
                                 </div>
-                                <div class="colors__item">
+                                <div class="colors__item" data-color="Red">
                                     <span class="colors__checkbox">
                                         <img
                                             class="colors__checkarrow"
@@ -264,7 +272,7 @@
                                         >Red</label
                                     >
                                 </div>
-                                <div class="colors__item">
+                                <div class="colors__item" data-color="Yellow">
                                     <span class="colors__checkbox"
                                         ><img
                                             class="colors__checkarrow"
@@ -281,7 +289,7 @@
                                         >Yellow</label
                                     >
                                 </div>
-                                <div class="colors__item">
+                                <div class="colors__item" data-color="Green">
                                     <span class="colors__checkbox"
                                         ><img
                                             class="colors__checkarrow"
@@ -309,7 +317,7 @@
                         </button>
                         <div class="reviewed">
                             <h2 class="sidebar__title">Reviewed By You</h2>
-                            <div class="reviewed__inner">
+                            <div class="reviewed__inner" id="reviewedProducts">
                                 <div class="reviewed__item">
                                     <a class="reviewed__preview" href="#">
                                         <img
@@ -387,12 +395,16 @@
                         <div class="catalog__header">
                             <div class="catalog__text">
                                 There are
-                                <span id="productsCount">67</span> products in
-                                this category
+                                <span id="productsCount">loading...</span>
+                                products in this category
                             </div>
                             <div class="catalog__filter">
-                                By relevance
                                 <div class="arrow arrow--catalog"></div>
+                                <select class="catalog__select" id="sort">
+                                    <option value="">By relevance</option>
+                                    <option value="ASC">By asc</option>
+                                    <option value="DESC">By desc</option>
+                                </select>
                             </div>
                         </div>
                         <div class="catalog__inner" id="products"></div>

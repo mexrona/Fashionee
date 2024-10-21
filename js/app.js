@@ -18,16 +18,26 @@ window.addEventListener("scroll", () => {
 const PRODUCT_IN_BASKET_KEY = "product-in-basket";
 const FAVORITE_PRODUCT_KEY = "favorite-product";
 
-const filter = {
-    /* category: "All",
+let oldFilter = {
+    category: "All",
     price: {
         min: 0,
         max: 999999,
     },
-    colors: [], */
+    colors: [],
+};
+
+const currentFilter = {
+    category: "All",
+    price: {
+        min: 0,
+        max: 999999,
+    },
+    colors: [],
 };
 
 let searchValue = "";
+let sort = "";
 
 const debounce = (f, t) => {
     return function (args) {
@@ -566,11 +576,36 @@ const filterProducts = (searchValue, filter, sort, pagination) => {
     }
 
     if (Object.keys(filter)) {
-        if (filter.category) {
+        if (
+            filter.category &&
+            filter.category !== "All" &&
+            filter.price.min &&
+            filter.price.max &&
+            filter.colors.length
+        ) {
             filteredProducts = filteredProducts.filter((product) => {
-                return product.categories.includes(filter.category);
+                return (
+                    product.categories.includes(filter.category) &&
+                    product.price >= filter.price.min &&
+                    product.price <= filter.price.max &&
+                    product.color === filter.colors[0]
+                );
             });
         }
+    }
+
+    if (sort) {
+        filteredProducts.sort((a, b) => {
+            if (sort === "ASC") {
+                if (a.name > b.name) return 1;
+                if (a.name === b.name) return 0;
+                if (a.name < b.name) return -1;
+            }
+
+            if (a.name > b.name) return -1;
+            if (a.name === b.name) return 0;
+            if (a.name < b.name) return 1;
+        });
     }
 
     const productsCount = filteredProducts.length;
@@ -591,7 +626,8 @@ document.getElementById("search").addEventListener(
         searchValue = event.target.value;
         const {filteredProducts, productsCount} = filterProducts(
             searchValue,
-            filter
+            currentFilter,
+            sort
         );
 
         createProductList(filteredProducts);
@@ -602,13 +638,15 @@ document.getElementById("search").addEventListener(
 const applyFilter = document.getElementById("applyFilter");
 
 const toggleBlockFilterBtn = () => {
-    console.log(filter);
-
-    if (!Object.keys(filter).length || filter["category"] === "All") {
-        applyFilter.setAttribute("disabled", "disabled");
-        return;
-    } else {
+    if (
+        currentFilter.category !== oldFilter.category &&
+        currentFilter.price.min !== 0 &&
+        currentFilter.price.max !== 999999 &&
+        currentFilter.colors.length
+    ) {
         applyFilter.removeAttribute("disabled");
+    } else {
+        applyFilter.setAttribute("disabled", "disabled");
     }
 };
 
@@ -624,35 +662,109 @@ categoriesItems.forEach((item) => {
 
         if (!item.classList.contains("active")) {
             item.classList.add("active");
+
+            currentFilter["category"] = item.dataset.category;
         } else {
             item.classList.remove("active");
 
             document.querySelector(".categories__item").click();
         }
+    });
+});
 
-        if (item.classList.contains("active")) {
-            console.log(item.dataset.category);
+const priceMin = document.getElementById("priceMin");
+const priceMax = document.getElementById("priceMax");
+
+priceMax.addEventListener("keyup", () => {
+    currentFilter.price.min = Number(priceMin.value);
+    currentFilter.price.max = Number(priceMax.value);
+});
+
+const colors = document.querySelectorAll(".colors__item");
+
+colors.forEach((color) => {
+    color.addEventListener("click", () => {
+        colors.forEach((color) => {
+            color.classList.remove("active");
+            currentFilter.colors.pop();
+        });
+
+        if (!color.classList.contains("active")) {
+            color.classList.add("active");
+
+            currentFilter.colors.push(color.dataset.color);
+        } else {
+            color.classList.remove("active");
         }
-
-        filter["category"] = item.dataset.category;
 
         toggleBlockFilterBtn();
     });
 });
 
-applyFilter.addEventListener("click", () => {
+document.getElementsByClassName("colors__item")[1].click();
+
+applyFilter.addEventListener("click", (event) => {
     const {filteredProducts, productsCount} = filterProducts(
         searchValue,
-        filter
+        currentFilter,
+        sort
     );
 
     createProductList(filteredProducts);
     updateProductsCount(productsCount);
 
     toggleBlockFilterBtn();
+
+    event.target.setAttribute("disabled", "disabled");
+
+    oldFilter = JSON.parse(JSON.stringify(currentFilter));
 });
 
+const sortBtn = document.getElementById("sort");
+
+sortBtn.addEventListener("change", (event) => {
+    sort = event.target.value;
+
+    const {filteredProducts, productsCount} = filterProducts(
+        searchValue,
+        currentFilter,
+        sort
+    );
+
+    createProductList(filteredProducts);
+    updateProductsCount(productsCount);
+
+    console.log(event.target.value);
+});
+
+const getRandomProducts = (products, count) => {
+    const newProducts = [...products];
+    const randProducts = [];
+
+    do {
+        const randomNumber = Math.floor(Math.random() * newProducts.length);
+
+        randProducts[randProducts.length] = newProducts.splice(
+            randomNumber,
+            1
+        )[0];
+    } while (randProducts.length < count);
+
+    return randProducts;
+};
+
+const generateReviewedByYouProducts = () => {
+    const randomProducts = getRandomProducts(products, 3);
+
+    randomProducts.forEach((product) => {
+        const container = document.getElementById("reviewedProducts");
+    });
+};
+
+generateReviewedByYouProducts();
+
 createProductList(products);
+updateProductsCount(products.length);
 
 window.onload = () => {
     checkScroll();

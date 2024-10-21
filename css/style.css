@@ -87,6 +87,12 @@ h6 {
   font-weight: 400;
 }
 
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 .container {
   width: 100%;
   padding: 0 20px;
@@ -559,6 +565,20 @@ h6 {
   font-size: 12px;
   line-height: 1;
   color: #444444;
+}
+.price__item::-moz-placeholder {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1;
+  color: rgba(68, 68, 68, 0.5);
+}
+.price__item::placeholder {
+  font-family: "Josefin Sans", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1;
+  color: rgba(68, 68, 68, 0.5);
 }
 
 .price__element {
@@ -1111,6 +1131,21 @@ h6 {
 }
 .catalog__filter:hover .arrow::before {
   border-top-color: #ff8e8e;
+}
+.catalog__filter:hover .catalog__select {
+  color: #ff8e8e;
+}
+.catalog__filter:hover .catalog__select option {
+  color: #000;
+}
+
+.catalog__select {
+  font-family: "Raleway", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #000;
+  transition: color 0.1s linear;
 }
 
 .catalog__inner {

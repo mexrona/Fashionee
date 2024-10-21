@@ -12,6 +12,10 @@
 
 .price__item {
     @include font("Josefin Sans", 400, 12px, 1, $gray);
+
+    &::placeholder {
+        @include font("Josefin Sans", 400, 12px, 1, rgba($gray, 0.5));
+    }
 }
 
 .price__element {
