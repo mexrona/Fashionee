@@ -761,7 +761,7 @@ select {
 }
 
 .reviewed__img {
-  display: none;
+  width: 100%;
 }
 
 .reviewed__info {

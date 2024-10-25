@@ -753,11 +753,65 @@ const getRandomProducts = (products, count) => {
     return randProducts;
 };
 
+const createRandomProduct = (product) => {
+    const reviewedItem = document.createElement("div");
+    reviewedItem.classList.add("reviewed__item");
+
+    const reviewedPreview = document.createElement("a");
+    reviewedPreview.classList.add("reviewed__preview");
+    reviewedPreview.href = "#";
+
+    reviewedItem.appendChild(reviewedPreview);
+
+    const reviewedInfo = document.createElement("div");
+    reviewedInfo.classList.add("reviewed__info");
+
+    reviewedItem.appendChild(reviewedInfo);
+
+    const reviewedImg = document.createElement("img");
+    reviewedImg.classList.add("reviewed__img");
+    reviewedImg.src = `${product.image}`;
+    reviewedImg.alt = `${product.name}`;
+
+    reviewedPreview.appendChild(reviewedImg);
+
+    const reviewedName = document.createElement("a");
+    reviewedName.classList.add("reviewed__name");
+    reviewedName.href = "#";
+    reviewedName.innerHTML = `${product.name}`;
+
+    reviewedInfo.appendChild(reviewedName);
+
+    const reviewedPrice = document.createElement("div");
+    reviewedPrice.classList.add("reviewed__price");
+
+    reviewedInfo.appendChild(reviewedPrice);
+
+    const reviewedNew = document.createElement("span");
+    reviewedNew.classList.add("reviewed__new");
+    reviewedNew.innerHTML = `${product.price}`;
+
+    reviewedPrice.appendChild(reviewedNew);
+
+    const reviewedOld = document.createElement("span");
+    reviewedOld.classList.add("reviewed__old");
+    reviewedOld.innerHTML = `${product.oldPrice}`;
+
+    if (product.oldPrice !== null) {
+        reviewedPrice.appendChild(reviewedOld);
+    }
+
+    return reviewedItem;
+};
+
 const generateReviewedByYouProducts = () => {
     const randomProducts = getRandomProducts(products, 3);
+    const container = document.getElementById("reviewedProducts");
+    container.innerHTML = "";
 
     randomProducts.forEach((product) => {
-        const container = document.getElementById("reviewedProducts");
+        const randomProduct = createRandomProduct(product);
+        container.appendChild(randomProduct);
     });
 };
 
