@@ -907,6 +907,9 @@ select {
   padding: 0 50px;
   margin-top: 60px;
 }
+.pager.hide {
+  display: none;
+}
 
 .pager__arrow {
   width: 50px;

@@ -39,6 +39,11 @@ const currentFilter = {
 let searchValue = "";
 let sort = "";
 
+const paginationInfo = {
+    activePage: 0,
+    perPage: 12,
+};
+
 const debounce = (f, t) => {
     return function (args) {
         let previousCall = this.lastCall;
@@ -550,30 +555,93 @@ const createProduct = (product) => {
     return productWrapper;
 };
 
-const createProductList = (products) => {
-    const jsProducts = document.getElementById("products");
+const createPagination = (productsCount) => {
+    const jsPages = document.getElementById("pages");
+    const pager = document.getElementById("pager");
 
-    if (jsProducts) {
-        jsProducts.innerHTML = "";
+    if (!productsCount) {
+        pager.classList.add("hide");
 
-        for (const product of products) {
-            const createdProduct = createProduct(product);
+        return;
+    }
 
-            jsProducts.appendChild(createdProduct);
+    if (!jsPages) {
+        return;
+    }
+
+    pager.classList.remove("hide");
+
+    jsPages.innerHTML = "";
+
+    const pageCount = Math.ceil(productsCount / paginationInfo.perPage);
+
+    for (let i = 0; i < pageCount; i++) {
+        const pagerItem = document.createElement("div");
+        pagerItem.classList.add("pager__item");
+        jsPages.appendChild(pagerItem);
+
+        const pagerNumber = document.createElement("div");
+        pagerNumber.classList.add("pager__number");
+
+        if (i === paginationInfo.activePage) {
+            pagerNumber.classList.add("active");
         }
+
+        pagerNumber.innerHTML = i + 1;
+        pagerNumber.dataset.index = i;
+
+        pagerNumber.addEventListener("click", (event) => {
+            const currentElement = event.target;
+            const pagerNumbers = document.querySelectorAll(".pager__number");
+
+            pagerNumbers.forEach((element) => {
+                element.classList.remove("active");
+            });
+
+            currentElement.classList.add("active");
+
+            paginationInfo.activePage = Number(currentElement.dataset.index);
+
+            const {filteredProducts, productsCount} = filterProducts(
+                searchValue,
+                oldFilter,
+                sort,
+                paginationInfo
+            );
+
+            createProductList(filteredProducts, productsCount);
+        });
+
+        pagerItem.appendChild(pagerNumber);
     }
 };
 
-const filterProducts = (searchValue, filter, sort, pagination) => {
-    let filteredProducts = [...products];
+const createProductList = (products, productsCount) => {
+    const jsProducts = document.getElementById("products");
 
-    if (searchValue) {
-        filteredProducts = filteredProducts.filter((product) => {
-            return product.name
-                .toLowerCase()
-                .includes(searchValue.toLowerCase());
-        });
+    if (!jsProducts) {
+        return;
     }
+
+    jsProducts.innerHTML = "";
+
+    for (const product of products) {
+        const createdProduct = createProduct(product);
+
+        jsProducts.appendChild(createdProduct);
+    }
+
+    createPagination(productsCount);
+};
+
+const filterBySearchValue = (products, value) => {
+    return products.filter((product) => {
+        return product.name.toLowerCase().includes(value.toLowerCase());
+    });
+};
+
+const filterProductsByFilterInfo = (products, filter) => {
+    let filteredProducts = products;
 
     if (Object.keys(filter)) {
         if (
@@ -583,7 +651,7 @@ const filterProducts = (searchValue, filter, sort, pagination) => {
             filter.price.max &&
             filter.colors.length
         ) {
-            filteredProducts = filteredProducts.filter((product) => {
+            filteredProducts = products.filter((product) => {
                 return (
                     product.categories.includes(filter.category) &&
                     product.price >= filter.price.min &&
@@ -594,24 +662,60 @@ const filterProducts = (searchValue, filter, sort, pagination) => {
         }
     }
 
-    if (sort) {
-        filteredProducts.sort((a, b) => {
-            if (sort === "ASC") {
-                if (a.name > b.name) return 1;
-                if (a.name === b.name) return 0;
-                if (a.name < b.name) return -1;
-            }
+    return filteredProducts;
+};
 
-            if (a.name > b.name) return -1;
+const sortProduct = (products, sort) => {
+    products.sort((a, b) => {
+        if (sort === "ASC") {
+            if (a.name > b.name) return 1;
             if (a.name === b.name) return 0;
-            if (a.name < b.name) return 1;
-        });
-    }
+            if (a.name < b.name) return -1;
+        }
 
-    const productsCount = filteredProducts.length;
+        if (a.name > b.name) return -1;
+        if (a.name === b.name) return 0;
+        if (a.name < b.name) return 1;
+    });
+};
+
+const paginateProducts = (products, paginInfo) => {
+    const productsCount = products.length;
+
+    const {activePage, perPage} = paginInfo;
+
+    const firstIndex = activePage * perPage;
+    const paginatedProducts = products.slice(
+        firstIndex,
+        (activePage + 1) * perPage
+    );
 
     return {
+        productsCount,
+        paginatedProducts,
+    };
+};
+
+const filterProducts = (searchValue, filter, sort, pagination) => {
+    let filteredProducts = [...products];
+
+    if (searchValue) {
+        filteredProducts = filterBySearchValue(filteredProducts, searchValue);
+    }
+
+    filteredProducts = filterProductsByFilterInfo(filteredProducts, filter);
+
+    if (sort) {
+        sortProduct(filteredProducts, sort);
+    }
+
+    const {productsCount, paginatedProducts} = paginateProducts(
         filteredProducts,
+        pagination
+    );
+
+    return {
+        filteredProducts: paginatedProducts,
         productsCount,
     };
 };
@@ -624,13 +728,17 @@ document.getElementById("search").addEventListener(
     "keyup",
     debounce((event) => {
         searchValue = event.target.value;
+
+        paginationInfo.activePage = 0;
+
         const {filteredProducts, productsCount} = filterProducts(
             searchValue,
-            currentFilter,
-            sort
+            oldFilter,
+            sort,
+            paginationInfo
         );
 
-        createProductList(filteredProducts);
+        createProductList(filteredProducts, productsCount);
         updateProductsCount(productsCount);
     }, 500)
 );
@@ -704,13 +812,16 @@ colors.forEach((color) => {
 document.getElementsByClassName("colors__item")[1].click();
 
 applyFilter.addEventListener("click", (event) => {
+    paginationInfo.activePage = 0;
+
     const {filteredProducts, productsCount} = filterProducts(
         searchValue,
         currentFilter,
-        sort
+        sort,
+        paginationInfo
     );
 
-    createProductList(filteredProducts);
+    createProductList(filteredProducts, productsCount);
     updateProductsCount(productsCount);
 
     toggleBlockFilterBtn();
@@ -727,14 +838,13 @@ sortBtn.addEventListener("change", (event) => {
 
     const {filteredProducts, productsCount} = filterProducts(
         searchValue,
-        currentFilter,
-        sort
+        oldFilter,
+        sort,
+        paginationInfo
     );
 
-    createProductList(filteredProducts);
+    createProductList(filteredProducts, productsCount);
     updateProductsCount(productsCount);
-
-    console.log(event.target.value);
 });
 
 const getRandomProducts = (products, count) => {
@@ -817,7 +927,12 @@ const generateReviewedByYouProducts = () => {
 
 generateReviewedByYouProducts();
 
-createProductList(products);
+const {paginatedProducts, productsCount} = paginateProducts(
+    products,
+    paginationInfo
+);
+
+createProductList(paginatedProducts, productsCount);
 updateProductsCount(products.length);
 
 window.onload = () => {
