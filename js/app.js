@@ -590,9 +590,10 @@ const createPagination = (productsCount) => {
         pagerNumber.innerHTML = i + 1;
         pagerNumber.dataset.index = i;
 
+        const pagerNumbers = document.querySelectorAll(".pager__number");
+
         pagerNumber.addEventListener("click", (event) => {
             const currentElement = event.target;
-            const pagerNumbers = document.querySelectorAll(".pager__number");
 
             pagerNumbers.forEach((element) => {
                 element.classList.remove("active");
@@ -612,9 +613,90 @@ const createPagination = (productsCount) => {
             createProductList(filteredProducts, productsCount);
         });
 
+        if (
+            pagerNumber.dataset.index === "0" &&
+            pagerNumber.classList.contains("active")
+        ) {
+            pagerArrowPrev.classList.add("no-active");
+        }
+
+        if (
+            pagerNumber.dataset.index === "0" &&
+            !pagerNumber.classList.contains("active")
+        ) {
+            pagerArrowPrev.classList.remove("no-active");
+        }
+
+        if (
+            pagerNumber.dataset.index === String(pagerNumbers.length) &&
+            pagerNumber.classList.contains("active")
+        ) {
+            pagerArrowNext.classList.add("no-active");
+        }
+
+        if (
+            pagerNumber.dataset.index === String(pagerNumbers.length) &&
+            !pagerNumber.classList.contains("active")
+        ) {
+            pagerArrowNext.classList.remove("no-active");
+        }
+
         pagerItem.appendChild(pagerNumber);
     }
 };
+
+const pagerArrowPrev = document.getElementById("pagerArrowPrev");
+const pagerArrowNext = document.getElementById("pagerArrowNext");
+
+pagerArrowPrev.addEventListener("click", () => {
+    const pagerNumbers = document.querySelectorAll(".pager__number");
+
+    if (paginationInfo.activePage !== 0) {
+        const prevElement = pagerNumbers[paginationInfo.activePage - 1];
+
+        prevElement.classList.add("active");
+
+        paginationInfo.activePage = paginationInfo.activePage - 1;
+
+        pagerNumbers.forEach((element) => {
+            element.classList.remove("active");
+        });
+
+        const {filteredProducts, productsCount} = filterProducts(
+            searchValue,
+            oldFilter,
+            sort,
+            paginationInfo
+        );
+
+        createProductList(filteredProducts, productsCount);
+    }
+});
+
+pagerArrowNext.addEventListener("click", () => {
+    const pagerNumbers = document.querySelectorAll(".pager__number");
+
+    if (paginationInfo.activePage !== pagerNumbers.length) {
+        const nextElement = pagerNumbers[paginationInfo.activePage + 1];
+
+        nextElement.classList.add("active");
+
+        paginationInfo.activePage = paginationInfo.activePage + 1;
+
+        pagerNumbers.forEach((element) => {
+            element.classList.remove("active");
+        });
+
+        const {filteredProducts, productsCount} = filterProducts(
+            searchValue,
+            oldFilter,
+            sort,
+            paginationInfo
+        );
+
+        createProductList(filteredProducts, productsCount);
+    }
+});
 
 const createProductList = (products, productsCount) => {
     const jsProducts = document.getElementById("products");

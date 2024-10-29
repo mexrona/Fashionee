@@ -945,7 +945,7 @@ select {
   transition: border-color 0.1s linear;
 }
 .pager__arrow--prev::after, .pager__arrow--next::after {
-  top: calc(50% - 0.5px);
+  top: 50%;
   transform: translate(0, -50%) rotate(45deg);
 }
 .pager__arrow--prev::after {
@@ -963,6 +963,16 @@ select {
 }
 .pager__arrow:hover::after {
   border-color: #ff8e8e;
+}
+.pager__arrow.no-active {
+  opacity: 0.5;
+  cursor: default;
+}
+.pager__arrow.no-active:hover::before {
+  background-color: #000;
+}
+.pager__arrow.no-active:hover::after {
+  border-color: #000;
 }
 
 .pager__inner {
@@ -1007,6 +1017,9 @@ select {
 .pager__number:hover, .pager__number.active {
   font-weight: 400;
   color: #000;
+}
+.pager__number.active {
+  cursor: default;
 }
 .pager__number:hover::after, .pager__number.active::after {
   width: 22px;
