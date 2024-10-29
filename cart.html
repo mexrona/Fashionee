@@ -28,7 +28,7 @@
         <title>Cart</title>
     </head>
     <body>
-        <header class="header">
+        <header class="header" id="header">
             <div class="container container--header">
                 <div class="header__inner">
                     <div class="header__left">
@@ -44,7 +44,7 @@
                             </div>
                         </div>
                         <nav class="nav">
-                            <a class="nav__link" href="#">Home</a>
+                            <a class="nav__link" href="index.html">Home</a>
                             <div class="nav__down">
                                 <a class="nav__link nav__link--list" href="#"
                                     >Pages</a
@@ -91,7 +91,9 @@
                                         >
                                     </li>
                                     <li>
-                                        <a class="list__link" href="#">Cart</a>
+                                        <a class="list__link" href="cart.html"
+                                            >Cart</a
+                                        >
                                     </li>
                                     <li>
                                         <a class="list__link" href="#"
@@ -117,19 +119,19 @@
                                 src="img/icons/user.png"
                                 alt="My profile" />
                         </div>
-                        <div class="header__item">
+                        <a class="header__item" href="cart.html">
                             <img
                                 class="header__icon"
                                 src="img/icons/heart.png"
                                 alt="Wishlist" />
-                            <div class="header__count">0</div>
-                        </div>
+                            <div class="header__count" id="heart">0</div>
+                        </a>
                         <div class="header__item">
                             <img
                                 class="header__icon"
                                 src="img/icons/shopping-bag.png"
                                 alt="Cart" />
-                            <div class="header__count">2</div>
+                            <div class="header__count" id="cart">0</div>
                         </div>
                     </div>
                 </div>
@@ -157,8 +159,8 @@
             </section>
             <section class="container container--cart">
                 <div class="cart">
-                    <div class="cart__inner">
-                        <div class="cart__item">
+                    <div class="cart__inner" id="cartInner">
+                        <!--<div class="cart__item">
                             <a class="cart__preview" href="#">
                                 <img
                                     class="cart__img"
@@ -221,7 +223,7 @@
                                 </div>
                             </div>
                             <div class="cart__arrow"></div>
-                        </div>
+                        </div>-->
                     </div>
                     <div class="order">
                         <h3 class="order__title">Your Order</h3>
@@ -232,7 +234,9 @@
                             </div>
                             <div class="order__item">
                                 Discount for promo code
-                                <span class="order__status">No</span>
+                                <span class="order__status" id="orderStatus"
+                                    >No</span
+                                >
                             </div>
                             <div class="order__item">
                                 <span
@@ -264,6 +268,7 @@
                                     <label>
                                         <input
                                             class="input__item"
+                                            id="promoCodeInput"
                                             name="code"
                                             type="text"
                                             placeholder="Enter promo code" />
@@ -271,6 +276,7 @@
                                 </div>
                                 <button
                                     class="button button--code"
+                                    id="promoCodeBtn"
                                     type="submit">
                                     <span class="code__arrow"></span>
                                 </button>
@@ -486,5 +492,6 @@
             </div>
         </footer>
         <script src="js/app.js"></script>
+        <script src="js/cart.js"></script>
     </body>
 </html>

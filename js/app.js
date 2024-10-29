@@ -24,7 +24,7 @@ let oldFilter = {
         min: 0,
         max: 999999,
     },
-    colors: [],
+    colors: ["Blue"],
 };
 
 const currentFilter = {
@@ -645,6 +645,12 @@ const createPagination = (productsCount) => {
     }
 };
 
+window.onload = () => {
+    checkScroll();
+    updateBasketInfo();
+    updateFavoriteInfo();
+};
+
 const pagerArrowPrev = document.getElementById("pagerArrowPrev");
 const pagerArrowNext = document.getElementById("pagerArrowNext");
 
@@ -809,6 +815,8 @@ const updateProductsCount = (count) => {
 document.getElementById("search").addEventListener(
     "keyup",
     debounce((event) => {
+        applyFilter.removeAttribute("disabled");
+
         searchValue = event.target.value;
 
         paginationInfo.activePage = 0;
@@ -829,10 +837,10 @@ const applyFilter = document.getElementById("applyFilter");
 
 const toggleBlockFilterBtn = () => {
     if (
-        currentFilter.category !== oldFilter.category &&
-        currentFilter.price.min !== 0 &&
-        currentFilter.price.max !== 999999 &&
-        currentFilter.colors.length
+        currentFilter.category !== oldFilter.category ||
+        currentFilter.price.min !== 0 ||
+        currentFilter.price.max !== 999999 ||
+        currentFilter.colors[0] !== oldFilter.colors[0]
     ) {
         applyFilter.removeAttribute("disabled");
     } else {
@@ -1023,36 +1031,42 @@ window.onload = () => {
     updateFavoriteInfo();
 };
 
-const hearts = document.querySelectorAll(".catalog__heart");
+var addFavoriteProducts = (i) => {
+    const hearts = document.querySelectorAll(".catalog__heart");
 
-for (let i = 0; i <= hearts.length; i++) {
-    const heart = hearts[i];
+    while (i <= products.length) {
+        const heart = hearts[i];
 
-    heart.dataset.heart = i + 1;
+        heart.dataset.heart = i + 1;
 
-    var checkFavorite = () => {
-        if (localStorage.getItem(`${heart.dataset.heart}`)) {
-            heart.classList.add("favorite");
-        }
+        var checkFavorite = () => {
+            if (localStorage.getItem(`${heart.dataset.heart}`)) {
+                heart.classList.add("favorite");
+            }
 
-        if (!localStorage.getItem(`${heart.dataset.heart}`)) {
-            heart.classList.remove("favorite");
-        }
-    };
+            if (!localStorage.getItem(`${heart.dataset.heart}`)) {
+                heart.classList.remove("favorite");
+            }
+        };
 
-    heart.addEventListener("click", () => {
-        if (!localStorage.getItem(`${heart.dataset.heart}`)) {
-            localStorage.setItem(`${heart.dataset.heart}`, "favorite");
-            heart.classList.add("favorite");
-            return;
-        }
+        heart.addEventListener("click", () => {
+            if (!localStorage.getItem(`${heart.dataset.heart}`)) {
+                localStorage.setItem(`${heart.dataset.heart}`, "favorite");
+                heart.classList.add("favorite");
+                return;
+            }
 
-        if (localStorage.getItem(`${heart.dataset.heart}`)) {
-            localStorage.removeItem(`${heart.dataset.heart}`);
-            heart.classList.remove("favorite");
-            return;
-        }
-    });
+            if (localStorage.getItem(`${heart.dataset.heart}`)) {
+                localStorage.removeItem(`${heart.dataset.heart}`);
+                heart.classList.remove("favorite");
+                return;
+            }
+        });
 
-    checkFavorite();
-}
+        checkFavorite();
+
+        i++;
+    }
+};
+
+addFavoriteProducts(0);

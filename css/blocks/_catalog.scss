@@ -36,14 +36,6 @@
         color: $red;
     }
 
-    &:hover .arrow {
-        background-color: $red;
-    }
-
-    &:hover .arrow::before {
-        border-top-color: $red;
-    }
-
     &:hover .catalog__select {
         color: $red;
     }
