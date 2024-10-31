@@ -545,9 +545,21 @@ const createProduct = (product) => {
 
     const catalogBuy = document.createElement("button");
     catalogBuy.classList.add("catalog__buy");
+    catalogBuy.id = `${product.id}`;
     catalogBuy.innerHTML = "Купить";
-    catalogBuy.addEventListener("click", () => {
-        buyProduct(product);
+    catalogBuy.addEventListener("click", (event) => {
+        if (!localStorage.getItem(`hide${product.id}`)) {
+            buyProduct(product);
+        }
+
+        if (localStorage.getItem(`hide${product.id}`)) {
+            localStorage.removeItem(`hide${product.id}`);
+            localStorage.setItem(`nohide${product.id}`, "nohide");
+
+            const products = getFromLS(PRODUCT_IN_BASKET_KEY);
+            products[event.target.id - 1].quantity += 1;
+            setToLS(PRODUCT_IN_BASKET_KEY, products);
+        }
     });
 
     productWrapper.appendChild(catalogBuy);

@@ -1309,6 +1309,9 @@ select {
 .cart__item:first-child {
   margin-top: 0;
 }
+.cart__item.hide {
+  display: none;
+}
 
 .cart__preview {
   display: block;

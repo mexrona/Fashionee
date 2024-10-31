@@ -53,11 +53,12 @@ const generateCartProduct = (product) => {
 
     const cartCount = document.createElement("div");
     cartCount.classList.add("cart__count");
+    cartCount.id = `cartCount${product.id}`;
 
     const cartMinus = document.createElement("span");
     cartMinus.classList.add("cart__minus");
 
-    cartCount.innerHTML = "1";
+    cartCount.innerHTML = `${product.quantity}`;
 
     cartCount.appendChild(cartMinus);
 
@@ -80,12 +81,66 @@ const generateCartProduct = (product) => {
 
     cartItem.appendChild(cartContent);
 
+    var checkToDelete = () => {
+        if (localStorage.getItem(`hide${product.id}`)) {
+            cartItem.classList.add("hide");
+        }
+
+        if (localStorage.getItem(`nohide${product.id}`)) {
+            cartItem.classList.remove("hide");
+        }
+    };
+
+    checkToDelete();
+
     const cartArrow = document.createElement("div");
     cartArrow.classList.add("cart__arrow");
-    cartArrow.addEventListener("click", () => {
+    cartArrow.id = `${product.id}`;
+    cartArrow.addEventListener("click", (event) => {
         const products = getFromLS(PRODUCT_IN_BASKET_KEY);
+        const cartElement = document.getElementById("cart");
+        const cartCount = Number(cartElement.innerHTML);
+        const productElement = document.getElementById(
+            `cartCount${product.id}`
+        );
 
-        console.log(products);
+        if (products[Number(event.target.id) - 1].quantity === 1) {
+            if (localStorage.getItem(`nohide${product.id}`)) {
+                localStorage.removeItem(`nohide${product.id}`);
+            }
+
+            cartElement.innerHTML = cartCount - 1;
+
+            products[Number(event.target.id) - 1].quantity = 0;
+
+            productElement.innerHTML =
+                products[Number(event.target.id) - 1].quantity;
+
+            localStorage.setItem(`hide${product.id}`, "hide");
+            setToLS(PRODUCT_IN_BASKET_KEY, products);
+
+            checkToDelete();
+
+            console.log("=== 1");
+
+            return;
+        }
+
+        if (products[Number(event.target.id) - 1].quantity > 1) {
+            cartElement.innerHTML = cartCount - 1;
+
+            products[Number(event.target.id) - 1].quantity =
+                products[Number(event.target.id) - 1].quantity - 1;
+
+            productElement.innerHTML =
+                products[Number(event.target.id) - 1].quantity;
+
+            setToLS(PRODUCT_IN_BASKET_KEY, products);
+
+            console.log("> 1");
+
+            return;
+        }
     });
 
     cartItem.appendChild(cartArrow);
