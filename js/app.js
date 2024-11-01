@@ -557,8 +557,15 @@ const createProduct = (product) => {
             localStorage.setItem(`nohide${product.id}`, "nohide");
 
             const products = getFromLS(PRODUCT_IN_BASKET_KEY);
+            const cartInnerId = document.getElementById(
+                `cartInner${product.id}`
+            );
+
             products[event.target.id - 1].quantity += 1;
+
             setToLS(PRODUCT_IN_BASKET_KEY, products);
+
+            cartInnerId.innerHTML = products[event.target.id - 1].quantity + 1;
         }
     });
 

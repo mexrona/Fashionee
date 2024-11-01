@@ -230,7 +230,9 @@
                         <div class="order__inner">
                             <div class="order__item">
                                 Оrder price
-                                <span class="order__price">&#36;146.98</span>
+                                <span class="order__price" id="orderPrice"
+                                    >&#36;0</span
+                                >
                             </div>
                             <div class="order__item">
                                 Discount for promo code
@@ -245,16 +247,22 @@
                                         >(Aug 02 at 16:00)</span
                                     ></span
                                 >
-                                <span class="order__price">&#36;16</span>
+                                <span class="order__price" id="delivery"
+                                    >&#36;16</span
+                                >
                             </div>
                         </div>
                         <div class="order__total">
                             Total
-                            <span class="order__price order__price--total"
-                                >&#36;162.98</span
+                            <span
+                                class="order__price order__price--total"
+                                id="total"
+                                >&#36;0</span
                             >
                         </div>
-                        <div class="button button--order">Checkout</div>
+                        <div class="button button--order" id="checkout">
+                            Checkout
+                        </div>
                     </div>
                     <div class="code">
                         <h3 class="code__title">You have a promo code?</h3>
