@@ -1053,10 +1053,10 @@ window.onload = () => {
 var addFavoriteProducts = (i) => {
     const hearts = document.querySelectorAll(".catalog__heart");
 
-    while (i <= products.length) {
-        const heart = hearts[i];
+    while (i < paginationInfo.perPage) {
+        let heart = hearts[i];
 
-        heart.dataset.heart = i + 1;
+        heart.setAttribute("heart", `${i + 1}`);
 
         var checkFavorite = () => {
             if (localStorage.getItem(`${heart.dataset.heart}`)) {
