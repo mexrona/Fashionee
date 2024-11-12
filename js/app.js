@@ -508,6 +508,7 @@ const createProduct = (product) => {
     catalogHeart.id = `${product.id}`;
     catalogHeart.addEventListener("click", () => {
         addFavorite(product);
+        checkFavorite();
     });
 
     const catalogHeartImg = document.createElement("img");
@@ -627,7 +628,7 @@ const createPagination = (productsCount) => {
 
         pagerNumber.addEventListener("click", (event) => {
             paginateCount();
-            addFavoriteProducts(Number(localStorage.getItem("paginate-count")));
+            // addFavoriteProducts(Number(localStorage.getItem("paginate-count")));
 
             const currentElement = event.target;
 
@@ -647,7 +648,7 @@ const createPagination = (productsCount) => {
             );
 
             createProductList(filteredProducts, productsCount);
-            addFavoriteProducts(Number(localStorage.getItem("paginate-count")));
+            // addFavoriteProducts(Number(localStorage.getItem("paginate-count")));
             checkFavorite();
         });
 
@@ -694,7 +695,7 @@ const pagerArrowNext = document.getElementById("pagerArrowNext");
 
 pagerArrowPrev.addEventListener("click", () => {
     paginateCount();
-    addFavoriteProducts(Number(localStorage.getItem("paginate-count")));
+    // addFavoriteProducts(Number(localStorage.getItem("paginate-count")));
 
     const pagerNumbers = document.querySelectorAll(".pager__number");
 
@@ -717,14 +718,14 @@ pagerArrowPrev.addEventListener("click", () => {
         );
 
         createProductList(filteredProducts, productsCount);
-        addFavoriteProducts(Number(localStorage.getItem("paginate-count")));
+        // addFavoriteProducts(Number(localStorage.getItem("paginate-count")));
         checkFavorite();
     }
 });
 
 pagerArrowNext.addEventListener("click", () => {
     paginateCount();
-    addFavoriteProducts(Number(localStorage.getItem("paginate-count")));
+    // addFavoriteProducts(Number(localStorage.getItem("paginate-count")));
 
     const pagerNumbers = document.querySelectorAll(".pager__number");
 
@@ -747,7 +748,7 @@ pagerArrowNext.addEventListener("click", () => {
         );
 
         createProductList(filteredProducts, productsCount);
-        addFavoriteProducts(Number(localStorage.getItem("paginate-count")));
+        // addFavoriteProducts(Number(localStorage.getItem("paginate-count")));
         checkFavorite();
     }
 });
@@ -1081,7 +1082,6 @@ window.onload = () => {
 
 var addFavoriteProducts = (i) => {
     const hearts = document.querySelectorAll(".catalog__heart");
-    const redHearts = [];
 
     for (let j = 0; j < hearts.length; j++) {
         let heart = hearts[j];
@@ -1090,8 +1090,6 @@ var addFavoriteProducts = (i) => {
 
         heart.addEventListener("click", () => {
             if (!localStorage.getItem(`${heart.getAttribute("heart")}`)) {
-                redHearts.push(Number(heart.getAttribute("heart")));
-                localStorage.setItem("red-hearts", redHearts);
                 localStorage.setItem(
                     `${heart.getAttribute("heart")}`,
                     "favorite"
@@ -1103,14 +1101,6 @@ var addFavoriteProducts = (i) => {
             if (localStorage.getItem(`${heart.getAttribute("heart")}`)) {
                 localStorage.removeItem(`${heart.getAttribute("heart")}`);
                 heart.classList.remove("favorite");
-
-                localStorage.setItem(
-                    "red-hearts",
-                    redHearts.filter(
-                        (number) =>
-                            number !== Number(heart.getAttribute("heart"))
-                    )
-                );
                 return;
             }
         });
@@ -1125,40 +1115,49 @@ var addFavoriteProducts = (i) => {
     }
 };
 
-addFavoriteProducts(12);
+// addFavoriteProducts(12);
 
 const checkFavorite = () => {
     const hearts = document.querySelectorAll(".catalog__heart");
+
     const heartsId = [];
 
     const redHearts = [];
+
+    const isFavoriteValues = [];
 
     hearts.forEach((heart) => {
         heartsId.push(Number(heart.id));
     });
 
-    if (localStorage.getItem(FAVORITE_PRODUCT_KEY)) {
+    const copyOfFavorites = JSON.parse(
+        JSON.stringify(localStorage.getItem(FAVORITE_PRODUCT_KEY))
+    );
+
+    if (copyOfFavorites) {
         const favoriteProducts = JSON.parse(
             localStorage.getItem(FAVORITE_PRODUCT_KEY)
         );
 
         favoriteProducts.forEach((product) => {
             redHearts.push(product.id);
+            isFavoriteValues.push(product.isFavorite);
         });
     }
 
     for (let i = 0; i < heartsId.length; i++) {
         for (let j = 0; j < redHearts.length; j++) {
             if (heartsId[i] === redHearts[j]) {
-                hearts[i].classList.add("favorite");
+                if (isFavoriteValues[j] === 1) {
+                    hearts[i].classList.add("favorite");
+                }
 
-                console.log(hearts[i]);
+                if (isFavoriteValues[j] === 0) {
+                    hearts[i].classList.remove("favorite");
+                }
             }
         }
     }
-
-    console.log(heartsId);
-    console.log(redHearts);
 };
 
 checkFavorite();
