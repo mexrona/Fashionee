@@ -57,46 +57,60 @@ const generateCartProduct = (product) => {
     cartCount.id = `cartCount${product.id}`;
     cartCount.dataset.quantity = `${product.quantity}`;
 
+    var rounded = function (number) {
+        return Math.round(parseFloat(number) * 100) / 100;
+    };
+
     const cartMinus = document.createElement("span");
     cartMinus.classList.add("cart__minus");
     cartMinus.id = `${product.id}`;
-    cartMinus.addEventListener("click", (event) => {
-        const products = getFromLS(PRODUCT_IN_BASKET_KEY);
+    cartMinus.addEventListener("click", () => {
+        const productsFromLS = getFromLS(PRODUCT_IN_BASKET_KEY);
         const cartElement = document.getElementById("cart");
-        const cartCount = Number(cartElement.innerHTML);
         const productElement = document.getElementById(
             `cartInner${product.id}`
         );
+        const productMainPrice = document.getElementById(
+            `cartMain${product.id}`
+        );
 
-        if (products[Number(event.target.id) - 1].quantity === 1) {
-            if (localStorage.getItem(`nohide${product.id}`)) {
-                localStorage.removeItem(`nohide${product.id}`);
+        productsFromLS.forEach((productFromLS) => {
+            if (
+                productFromLS.id === product.id &&
+                productFromLS.quantity === 1
+            ) {
+                if (localStorage.getItem(`nohide${product.id}`)) {
+                    localStorage.removeItem(`nohide${product.id}`);
+                }
+
+                productFromLS.quantity = 0;
+                setToLS(PRODUCT_IN_BASKET_KEY, productsFromLS);
+                cartElement.innerHTML -= 1;
+                localStorage.setItem(`hide${product.id}`, "hide");
+                checkToDelete();
+
+                productMainPrice.innerHTML = `$${rounded(
+                    productFromLS.price * productFromLS.quantity
+                )}`;
+
+                orderPriceCheck();
+                totalPriceCheck();
             }
 
-            cartElement.innerHTML = cartCount - 1;
+            if (productFromLS.id === product.id && productFromLS.quantity > 1) {
+                productFromLS.quantity -= 1;
+                productElement.innerHTML -= 1;
+                cartElement.innerHTML -= 1;
+                setToLS(PRODUCT_IN_BASKET_KEY, productsFromLS);
 
-            products[Number(event.target.id) - 1].quantity = 0;
+                productMainPrice.innerHTML = `$${rounded(
+                    productFromLS.price * productFromLS.quantity
+                )}`;
 
-            productElement.innerHTML =
-                products[Number(event.target.id) - 1].quantity;
-
-            localStorage.setItem(`hide${product.id}`, "hide");
-            setToLS(PRODUCT_IN_BASKET_KEY, products);
-
-            checkToDelete();
-        }
-
-        if (products[Number(event.target.id) - 1].quantity > 1) {
-            cartElement.innerHTML = cartCount - 1;
-
-            products[Number(event.target.id) - 1].quantity =
-                products[Number(event.target.id) - 1].quantity - 1;
-
-            productElement.innerHTML =
-                products[Number(event.target.id) - 1].quantity;
-
-            setToLS(PRODUCT_IN_BASKET_KEY, products);
-        }
+                orderPriceCheck();
+                totalPriceCheck();
+            }
+        });
     });
 
     const cartInner = document.createElement("span");
@@ -110,36 +124,30 @@ const generateCartProduct = (product) => {
     const cartPlus = document.createElement("span");
     cartPlus.classList.add("cart__plus");
     cartPlus.id = `${product.id}`;
-    cartPlus.addEventListener("click", (event) => {
-        const products = getFromLS(PRODUCT_IN_BASKET_KEY);
+    cartPlus.addEventListener("click", () => {
+        buyProduct(product);
+
+        const productsFromLS = getFromLS(PRODUCT_IN_BASKET_KEY);
         const productElement = document.getElementById(
             `cartInner${product.id}`
         );
-        const productCount = Number(productElement.innerHTML);
+        const productMainPrice = document.getElementById(
+            `cartMain${product.id}`
+        );
 
-        if (!localStorage.getItem(`hide${product.id}`)) {
-            console.log("buy");
-            buyProduct(product);
+        productsFromLS.forEach((productFromLS) => {
+            if (productFromLS.id === product.id) {
+                if (productElement) {
+                    productElement.innerHTML = productFromLS.quantity;
+                    productMainPrice.innerHTML = `$${rounded(
+                        productFromLS.price * productFromLS.quantity
+                    )}`;
 
-            products[event.target.id - 1].quantity =
-                products[event.target.id - 1].quantity + 1;
-            productElement.innerHTML = products[event.target.id - 1].quantity;
-
-            setToLS(PRODUCT_IN_BASKET_KEY, products);
-        }
-
-        if (localStorage.getItem(`hide${product.id}`)) {
-            localStorage.removeItem(`hide${product.id}`);
-            localStorage.setItem(`nohide${product.id}`, "nohide");
-
-            console.log(productCount);
-
-            products[event.target.id - 1].quantity =
-                products[event.target.id - 1].quantity + 1;
-            productElement.innerHTML = products[event.target.id - 1].quantity;
-
-            setToLS(PRODUCT_IN_BASKET_KEY, products);
-        }
+                    orderPriceCheck();
+                    totalPriceCheck();
+                }
+            }
+        });
     });
 
     cartCount.appendChild(cartPlus);
@@ -150,7 +158,8 @@ const generateCartProduct = (product) => {
 
     const cartMain = document.createElement("div");
     cartMain.classList.add("cart__main");
-    cartMain.innerHTML = `$${product.price}`;
+    cartMain.id = `cartMain${product.id}`;
+    cartMain.innerHTML = `$${rounded(product.price * product.quantity)}`;
 
     cartInfo.appendChild(cartMain);
 
@@ -173,51 +182,36 @@ const generateCartProduct = (product) => {
     const cartArrow = document.createElement("div");
     cartArrow.classList.add("cart__arrow");
     cartArrow.id = `${product.id}`;
-    cartArrow.addEventListener("click", (event) => {
-        const products = getFromLS(PRODUCT_IN_BASKET_KEY);
+    cartArrow.addEventListener("click", () => {
+        const productsFromLS = getFromLS(PRODUCT_IN_BASKET_KEY);
         const cartElement = document.getElementById("cart");
-        const cartCount = Number(cartElement.innerHTML);
         const productElement = document.getElementById(
             `cartInner${product.id}`
         );
+        const productMainPrice = document.getElementById(
+            `cartMain${product.id}`
+        );
 
-        if (products[Number(event.target.id) - 1].quantity === 1) {
-            if (localStorage.getItem(`nohide${product.id}`)) {
-                localStorage.removeItem(`nohide${product.id}`);
+        productsFromLS.forEach((productFromLS) => {
+            if (productFromLS.id === product.id) {
+                if (localStorage.getItem(`nohide${product.id}`)) {
+                    localStorage.removeItem(`nohide${product.id}`);
+                }
+
+                productFromLS.quantity = 0;
+                setToLS(PRODUCT_IN_BASKET_KEY, productsFromLS);
+                cartElement.innerHTML -= productElement.innerHTML;
+                localStorage.setItem(`hide${product.id}`, "hide");
+                checkToDelete();
+
+                productMainPrice.innerHTML = `$${rounded(
+                    productFromLS.price * productFromLS.quantity
+                )}`;
+
+                orderPriceCheck();
+                totalPriceCheck();
             }
-
-            cartElement.innerHTML = cartCount - 1;
-
-            products[Number(event.target.id) - 1].quantity = 0;
-
-            productElement.innerHTML =
-                products[Number(event.target.id) - 1].quantity;
-
-            localStorage.setItem(`hide${product.id}`, "hide");
-            setToLS(PRODUCT_IN_BASKET_KEY, products);
-
-            checkToDelete();
-
-            console.log("=== 1");
-
-            return;
-        }
-
-        if (products[Number(event.target.id) - 1].quantity > 1) {
-            cartElement.innerHTML = cartCount - 1;
-
-            products[Number(event.target.id) - 1].quantity =
-                products[Number(event.target.id) - 1].quantity - 1;
-
-            productElement.innerHTML =
-                products[Number(event.target.id) - 1].quantity;
-
-            setToLS(PRODUCT_IN_BASKET_KEY, products);
-
-            console.log("> 1");
-
-            return;
-        }
+        });
     });
 
     cartItem.appendChild(cartArrow);
@@ -230,10 +224,12 @@ const generateCartProducts = () => {
     const container = document.getElementById("cartInner");
     container.innerHTML = "";
 
-    cartProducts.forEach((product) => {
-        const cartProduct = generateCartProduct(product);
-        container.appendChild(cartProduct);
-    });
+    if (cartProducts) {
+        cartProducts.forEach((product) => {
+            const cartProduct = generateCartProduct(product);
+            container.appendChild(cartProduct);
+        });
+    }
 };
 
 generateCartProducts();
@@ -244,65 +240,74 @@ const orderStatus = document.querySelector("#orderStatus");
 
 var checkPromo = () => {
     if (localStorage.getItem("promo-code")) {
-        orderStatus.innerHTML = "Yes";
+        orderStatus.innerHTML = "10%";
     }
 
     if (!localStorage.getItem("promo-code")) {
-        orderStatus.innerHTML = "No";
+        orderStatus.innerHTML = "0%";
     }
 };
 
 promoCodeBtn.addEventListener("click", (event) => {
     event.preventDefault();
 
-    if (promoCodeInput.value) {
+    if (promoCodeInput.value === "ilovereact") {
         localStorage.setItem("promo-code", "true");
         checkPromo();
+        totalPriceCheck();
     }
 });
 
 checkPromo();
 
-const orderPrice = document.getElementById("orderPrice");
-const discount = document.getElementById("orderStatus");
-const delivery = document.getElementById("delivery");
-const total = document.getElementById("total");
-const checkout = document.getElementById("checkout");
-const cartNews = document.querySelectorAll(".cart__new");
-const cartCounts = document.querySelectorAll(".cart__count");
+var orderPriceCheck = () => {
+    const orderPrice = document.getElementById("orderPrice");
+    let sumOfProducts = 0;
+    const allProducts = JSON.parse(localStorage.getItem(PRODUCT_IN_BASKET_KEY));
 
-checkout.addEventListener("click", () => {
-    console.log("click");
-});
-
-var checkOutPrices = function () {
-    orderPrice.innerHTML = "";
-    let sumPrice = 0;
-    let totalPrice = 0;
-
-    for (let i = 0; i < cartNews.length; i++) {
-        const currentNew = cartNews[i];
-        const currentCount = cartCounts[i];
-
-        const currentNewInner = Number(currentNew.id);
-        const currentCountInner = Number(currentCount.dataset.quantity);
-
-        sumPrice += currentNewInner * currentCountInner;
+    if (allProducts) {
+        allProducts.forEach((product) => {
+            let productPrice = product.price * product.quantity;
+            sumOfProducts += productPrice;
+            sumOfProducts = Math.round(parseFloat(sumOfProducts) * 100) / 100;
+        });
     }
 
-    totalPrice += sumPrice;
+    orderPrice.innerHTML = `$${sumOfProducts}`;
 
-    if (discount.innerHTML === "Yes") {
-        totalPrice -= 5;
-    }
-
-    totalPrice += 16;
-
-    orderPrice.innerHTML = `$${sumPrice.toFixed(2)}`;
-    total.innerHTML = `$${totalPrice.toFixed(2)}`;
-
-    console.log(sumPrice.toFixed(2));
-    console.log(totalPrice.toFixed(2));
+    return sumOfProducts;
 };
 
-checkOutPrices();
+orderPriceCheck();
+
+// const cartNews = document.querySelectorAll(".cart__new");
+// const cartCounts = document.querySelectorAll(".cart__count");
+
+var totalPriceCheck = () => {
+    const total = document.getElementById("total");
+    const orderPrice = orderPriceCheck();
+
+    if (!localStorage.getItem("promo-code")) {
+        total.innerHTML = `$${
+            Math.round(parseFloat(orderPrice + 15) * 100) / 100
+        }`;
+    }
+
+    if (localStorage.getItem("promo-code")) {
+        total.innerHTML = `$${
+            Math.round(parseFloat(orderPrice * 0.9 + 15) * 100) / 100
+        }`;
+    }
+};
+
+totalPriceCheck();
+
+const discount = document.getElementById("orderStatus");
+const delivery = document.getElementById("delivery");
+const checkout = document.getElementById("checkout");
+
+checkout.addEventListener("click", () => {
+    console.log(
+        `Order price ${orderPrice.innerHTML}\nDiscount for promo code ${orderStatus.innerHTML}\nDelivery ${delivery.innerHTML}\nTotal ${total.innerHTML}`
+    );
+});
